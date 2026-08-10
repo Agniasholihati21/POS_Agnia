@@ -64,7 +64,7 @@ class ProdukController extends Controller
         }
          Produk::create($data);
 
-         return redirect()->route('produk.index')->with('success', 'Product created successfully.');
+         return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -120,20 +120,32 @@ class ProdukController extends Controller
 
         $produk->update($data);
 
-        return redirect()->route('produk.edit', $produk->id)->with('success', 'Product updated successfully.');
+        return redirect()->route('produk.edit', $produk->id)->with('success', 'Produk berhasil diperbarui.');
+    }
+/**
+ * Remove the specified resource from storage.
+ */
+public function destroy(Produk $produk)
+{
+    $this->authorize('delete', $produk);
+
+    // Cek apakah produk masih digunakan pada item penjualan
+    if ($produk->itemPenjualan()->exists()) {
+        return redirect()
+            ->route('produk.index')
+            ->with('error', 'Produk tidak dapat dihapus karena sudah digunakan pada transaksi penjualan.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Produk $produk)
-    {
-        $this->authorize('delete', $produk);
-        
-        if ($produk->foto) {
+    // Hapus foto jika ada
+    if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
         Storage::disk('public')->delete($produk->foto);
     }
+
+    // Hapus produk
     $produk->delete();
-    return redirect()->route('produk.index')->with('success', 'Product deleted successfully.');
+
+    return redirect()
+        ->route('produk.index')
+        ->with('success', 'Produk berhasil dihapus.');
 }
 }

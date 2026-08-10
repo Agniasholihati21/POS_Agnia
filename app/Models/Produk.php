@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\ItemPenjualan;
 
 class Produk extends Model
 {
     use HasFactory;
 
     protected $table = 'produk';
-    
+
     protected $fillable = [
         'user_id',
         'foto',
@@ -22,11 +24,11 @@ class Produk extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function itemPenjualan()
     {
-        return $this->hasMany(itemPenjualan::class,'user_id');
+        return $this->hasMany(ItemPenjualan::class, 'produk_id');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Beranda')
 
 @section('content')
 
@@ -248,7 +248,7 @@
         <span class="header-badge d-inline-block mb-3">
           <i class="bi bi-calendar3 me-2"></i>{{ $tanggalHariIni->translatedFormat('l, d F Y') }}
         </span>
-        <h2 class="display-6 fw-bold mb-2">Dashboard</h2>
+        <h2 class="display-6 fw-bold mb-2">Beranda</h2>
         <p class="text-white mb-0 fs-6" style="opacity: 0.95;">
           @if(auth()->user()->role == 'admin')
           @else

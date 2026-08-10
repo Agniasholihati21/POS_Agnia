@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Penjualan - Luxe Florist')
+@section('title', 'Daftar Penjualan')
 
 @section('content')
 

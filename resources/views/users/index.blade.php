@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Manajemen Users - Luxe Florist')
+@section('title', 'Pengguna')
 
 @section('content')
 
@@ -19,7 +19,7 @@
     --soft-rose: #FFD3DD;
     --dark-rose: #C2596C;
     --text-dark: #2D2527;
-    --text-muted: #8C827A;
+    --text-muted: #8C827A;a
     --border-color: #F7E7EB;
   }
 
@@ -228,7 +228,7 @@
 <div class="container my-4">
   <div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-3">
     <div>
-      <h2 class="serif-font fw-bold m-0 fs-2">User</h2>
+      <h2 class="serif-font fw-bold m-0 fs-2">Pengguna</h2>
       <p class="text-white m-0 mt-1" style="opacity: 0.95;"></p>
     </div>
     <div class="d-none d-md-block">
@@ -240,7 +240,7 @@
     <div class="row g-3 justify-content-between align-items-center mb-4">
       <div class="col-md-5 col-lg-4">
         <a href="{{ route('admin.users.create') }}" class="btn btn-create d-inline-flex align-items-center gap-2">
-          <i class="bi bi-person-plus-fill"></i> Tambah User Baru
+          <i class="bi bi-person-plus-fill"></i> Tambah Pengguna Baru
         </a>
       </div>
 
@@ -313,7 +313,7 @@
           <tr>
             <td colspan="5" class="text-muted text-center py-5">
               <i class="bi bi-person-exclamation fs-1 d-block text-muted mb-2"></i>
-              Tidak ada data user yang ditemukan.
+              Tidak ada data pengguna yang ditemukan.
             </td>
           </tr>
           @endforelse

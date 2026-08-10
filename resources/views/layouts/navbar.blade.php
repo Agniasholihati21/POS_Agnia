@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top florist-navbar">
     <div class="container">
 
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('dashboard') }}">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('Beranda') }}">
             <i class="bi bi-flower1 me-2"></i>
             Bouquet POS
         </a>
@@ -19,10 +19,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}"
-                       href="{{ route('dashboard') }}">
+                    <a class="nav-link {{ Request::is('Beranda') ? 'active' : '' }}"
+                       href="{{ route('Beranda') }}">
                         <i class="bi bi-grid-fill me-1"></i>
-                        Dashboard
+                        Beranda
                     </a>
                 </li>
 
@@ -30,7 +30,7 @@
                     <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}"
                        href="{{ route('admin.users') }}">
                         <i class="bi bi-people-fill me-1"></i>
-                        Users
+                        Pengguna
                     </a>
                 </li>
 
@@ -71,7 +71,7 @@
 
                     <button type="submit" class="btn btn-light btn-sm px-3 rounded-pill">
                         <i class="bi bi-box-arrow-right"></i>
-                        Logout
+                        Keluar
                     </button>
                 </form>
 

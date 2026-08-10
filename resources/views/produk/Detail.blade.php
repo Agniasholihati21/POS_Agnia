@@ -1,254 +1,424 @@
-
 @extends('layouts.app')
 
-@section('title', 'Detail Produk')
+@section('title','Detail Produk')
 
 @section('content')
 
 @include('layouts.navbar')
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-  body {
-    background-color: #f0f3f8;
-    color: #2d3748;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+body{
+    background:#f5f7fb;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:#334155;
+}
 
-  /* Header Section */
-  .page-header {
-    background: linear-gradient(135deg, #1e1e38 0%, #2a2a50 100%);
-    color: #ffffff;
-    padding: 1.8rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(30, 30, 56, 0.15);
-    margin-bottom: 2rem;
-  }
+/*================ HEADER ================*/
 
-  /* Main Card Detail Container */
-  .detail-card {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-    border: 1px solid #e2e8f0;
-    overflow: hidden;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+.page-header{
+    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    border-radius:22px;
+    padding:30px 35px;
+    color:white;
+    margin-bottom:35px;
+    box-shadow:0 18px 40px rgba(168,85,247,.25);
+}
 
-  /* Product Image Styling */
-  .product-img-wrapper {
-    background-color: #f8fafc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    min-height: 300px;
-    border-right: 1px solid #f1f5f9;
-  }
+.page-header h2{
+    font-weight:700;
+    margin-bottom:5px;
+}
 
-  .product-img-wrapper img {
-    max-height: 320px;
-    width: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-  }
+.page-header p{
+    color:rgba(255,255,255,.9);
+    margin:0;
+}
 
-  .product-img-wrapper img:hover {
-    transform: scale(1.03);
-  }
+.header-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    background:rgba(255,255,255,.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    margin-right:18px;
+}
 
-  /* Info Section Styling */
-  .product-info {
-    padding: 2rem;
-  }
+/*================ CARD ================*/
 
-  .product-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 1.2rem;
-  }
+.detail-card{
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.05),
+        0 10px 30px rgba(236,72,153,.08);
+}
 
-  .info-group {
-    background-color: #f8fafc;
-    border-radius: 12px;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
+/*================ FOTO ================*/
 
-  .info-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem 0;
-    border-bottom: 1px dashed #e2e8f0;
-  }
+.product-image{
+    background:#fff0f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:35px;
+    min-height:420px;
+}
 
-  .info-item:last-child {
-    border-bottom: none;
-  }
+.product-image img{
+    width:100%;
+    max-width:330px;
+    border-radius:18px;
+    transition:.4s;
+}
 
-  .info-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+.product-image img:hover{
+    transform:scale(1.05);
+}
 
-  .info-value {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #334155;
-  }
+/*================ INFO ================*/
 
-  .price-buy {
-    color: #0284c7;
-  }
+.product-info{
+    padding:35px;
+}
 
-  .price-sell {
-    color: #16a34a;
-    font-size: 1.2rem;
-  }
+.product-id{
 
-  /* Stock Badge */
-  .badge-stock {
-    background-color: #dcfce7;
-    color: #15803d;
-    border: 1px solid #bbf7d0;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 700;
-  }
+    display:inline-block;
+    background:#fdf2f8;
+    color:#ec4899;
+    padding:7px 16px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:15px;
 
-  .badge-stock-low {
-    background-color: #fef3c7;
-    color: #b45309;
-    border: 1px solid #fde68a;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 700;
-  }
+}
 
-  /* Buttons */
-  .btn-back {
-    background-color: #f1f5f9;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 0.7rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
+.product-title{
+    font-size:2rem;
+    font-weight:700;
+    color:#1f2937;
+    margin-bottom:25px;
+}
 
-  .btn-back:hover {
-    background-color: #e2e8f0;
-    color: #334155;
-  }
+.info-card{
 
-  .btn-edit {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.7rem 1.5rem;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
+    background:#fafafa;
+    border:2px solid #f3f4f6;
+    border-radius:18px;
+    padding:20px;
 
-  .btn-edit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3);
-    color: white;
-  }
+}
+
+.info-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px dashed #e5e7eb;
+
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-label{
+
+    color:#6b7280;
+    font-size:14px;
+    font-weight:600;
+
+}
+
+.info-value{
+
+    font-weight:700;
+    font-size:17px;
+
+}
+
+/*================ HARGA ================*/
+
+.buy-price{
+    color:#3b82f6;
+}
+
+.sell-price{
+    color:#22c55e;
+    font-size:22px;
+}
+
+/*================ BADGE ================*/
+
+.stock-good{
+
+    background:#dcfce7;
+    color:#15803d;
+    padding:7px 18px;
+    border-radius:30px;
+    font-weight:700;
+
+}
+
+.stock-low{
+
+    background:#fef3c7;
+    color:#b45309;
+    padding:7px 18px;
+    border-radius:30px;
+    font-weight:700;
+
+}
+
+/*================ BUTTON ================*/
+
+.btn-back{
+
+    background:white;
+    border:2px solid #e5e7eb;
+    color:#64748b;
+    padding:12px 28px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-back:hover{
+
+    background:#fdf2f8;
+    border-color:#f9a8d4;
+    color:#ec4899;
+
+}
+
+.btn-edit{
+
+    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-edit:hover{
+
+    transform:translateY(-3px);
+    color:white;
+    box-shadow:0 12px 25px rgba(168,85,247,.35);
+
+}
+
+@media(max-width:768px){
+
+.product-image{
+    min-height:280px;
+}
+
+.product-info{
+    padding:25px;
+}
+
+.product-title{
+    font-size:1.6rem;
+}
+
+}
 </style>
 
-<div class="container my-4">
-  <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
-    <div>
-      <h2 class="fw-bold m-0">🔍 Detail Produk</h2>
-      <p class="text-white-50 m-0 mt-1">Informasi lengkap rincian produk dan inventaris</p>
-    </div>
-    <a href="{{ route('produk.index') }}" class="btn btn-back mt-2 mt-md-0">
-      ← Kembali Ke Daftar
-    </a>
-  </div>
+<div class="container py-4">
 
-  <div class="detail-card">
-    <div class="row g-0 align-items-center">
-      <div class="col-md-5">
-        <div class="product-img-wrapper">
-          @if($produk->foto)
-            <img src="{{ asset('storage/' . $produk->foto) }}" alt="{{ $produk->nama }}">
-          @else
-            <div class="text-center text-muted">
-              <span style="font-size: 3rem;">📦</span>
-              <p class="mb-0 mt-2">Tidak ada foto produk</p>
-            </div>
-          @endif
-        </div>
-      </div>
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap">
 
-      <div class="col-md-7">
-        <div class="product-info">
-          <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill mb-2">
-            ID Produk: #{{ $produk->id }}
-          </span>
-          <h3 class="product-title">{{ $produk->nama }}</h3>
+<div class="d-flex align-items-center">
 
-          <div class="info-group">
-            <div class="info-item">
-              <span class="info-label">Harga Dasar (Beli)</span>
-              <span class="info-value price-buy">Rp {{ number_format($produk->harga_beli, 0, ',', '.') }}</span>
-            </div>
+<div class="header-icon">
+🌸
+</div>
 
-            <div class="info-item">
-              <span class="info-label">Harga Jual</span>
-              <span class="info-value price-sell">Rp {{ number_format($produk->harga_jual, 0, ',', '.') }}</span>
-            </div>
+<div>
 
-            <div class="info-item">
-              <span class="info-label">Sisa Stok</span>
-              <span class="info-value">
-                @if($produk->stok > 5)
-                  <span class="badge-stock">{{ $produk->stok }} pcs</span>
-                @else
-                  <span class="badge-stock-low">⚠️ {{ $produk->stok }} pcs</span>
-                @endif
-              </span>
-            </div>
+<h2>Detail Produk</h2>
 
-            <div class="info-item">
-              <span class="info-label">Penginput Data</span>
-              <span class="info-value text-secondary">
-                👤 {{ $produk->user->name ?? 'Sistem' }}
-              </span>
-            </div>
-          </div>
+<p>Informasi lengkap mengenai produk Bouquet POS.</p>
 
-          <div class="d-flex gap-2">
-            <a href="{{ route('produk.index') }}" class="btn btn-back">
-              Kembali
-            </a>
-            @if(Route::has('produk.edit'))
-              <a href="{{ route('produk.edit', $produk->id) }}" class="btn btn-edit">
-                ✏️ Edit Produk
-              </a>
-            @endif
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+
+</div>
+
+<a href="{{ route('produk.index') }}" class="btn btn-back mt-3 mt-md-0">
+
+← Kembali
+
+</a>
+
+</div>
+
+<div class="detail-card">
+
+<div class="row g-0">
+
+<div class="col-lg-5">
+
+<div class="product-image">
+
+@if($produk->foto)
+
+<img src="{{ asset('storage/'.$produk->foto) }}" alt="{{ $produk->nama }}">
+
+@else
+
+<div class="text-center text-muted">
+
+<div style="font-size:90px;">🌸</div>
+
+<h5>Tidak Ada Gambar</h5>
+
+</div>
+
+@endif
+
+</div>
+
+</div>
+
+<div class="col-lg-7">
+
+<div class="product-info">
+
+<span class="product-id">
+
+Produk #{{ $produk->id }}
+
+</span>
+
+<h2 class="product-title">
+
+{{ $produk->nama }}
+
+</h2>
+
+<div class="info-card">
+
+<div class="info-item">
+
+<span class="info-label">
+
+Harga Beli
+
+</span>
+
+<span class="info-value buy-price">
+
+Rp {{ number_format($produk->harga_beli,0,',','.') }}
+
+</span>
+
+</div>
+
+<div class="info-item">
+
+<span class="info-label">
+
+Harga Jual
+
+</span>
+
+<span class="info-value sell-price">
+
+Rp {{ number_format($produk->harga_jual,0,',','.') }}
+
+</span>
+
+</div>
+
+<div class="info-item">
+
+<span class="info-label">
+
+Stok
+
+</span>
+
+@if($produk->stok>5)
+
+<span class="stock-good">
+
+{{ $produk->stok }} pcs
+
+</span>
+
+@else
+
+<span class="stock-low">
+
+{{ $produk->stok }} pcs
+
+</span>
+
+@endif
+
+</div>
+
+<div class="info-item">
+
+<span class="info-label">
+
+Penginput
+
+</span>
+
+<span class="info-value">
+
+👤 {{ $produk->user->name ?? 'Sistem' }}
+
+</span>
+
+</div>
+
+</div>
+
+<div class="d-flex gap-3 mt-4">
+
+<a href="{{ route('produk.index') }}" class="btn btn-back">
+
+Kembali
+
+</a>
+
+@if(Route::has('produk.edit'))
+
+<a href="{{ route('produk.edit',$produk->id) }}" class="btn btn-edit">
+
+✏️ Edit Produk
+
+</a>
+
+@endif
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 @endsection
-
-```

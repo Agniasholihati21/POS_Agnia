@@ -7,140 +7,285 @@
 @include('layouts.navbar')
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-  body {
-    background-color: #f0f3f8;
-    color: #2d3748;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+body{
+    background:#f5f7fb;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:#334155;
+}
 
-  /* Header Section */
-  .page-header {
-    background: linear-gradient(135deg, #1e1e38 0%, #2a2a50 100%);
-    color: #ffffff;
-    padding: 1.8rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(30, 30, 56, 0.15);
-    margin-bottom: 2rem;
-  }
+/* ================= HEADER ================= */
 
-  /* Form Card Container */
-  .form-card {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-    padding: 2.2rem;
-    border: 1px solid #e2e8f0;
-    max-width: 850px;
-    margin: 0 auto;
-  }
+.page-header{
+    background:linear-gradient(135deg,#f472b6 0%,#a855f7 100%);
+    border-radius:22px;
+    padding:30px 35px;
+    margin-bottom:35px;
+    color:#fff;
+    box-shadow:0 18px 40px rgba(168,85,247,.25);
+}
 
-  /* Styling Form Input (Otomatis menerapkan ke partial _form.blade.php) */
-  .form-card .form-label {
-    font-weight: 600;
-    color: #475569;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
+.page-header h2{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:5px;
+}
 
-  .form-card .form-control,
-  .form-card .form-select,
-  .form-card textarea {
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    padding: 0.65rem 1rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-  }
+.page-header p{
+    color:rgba(255,255,255,.9);
+    margin:0;
+    font-size:15px;
+}
 
-  .form-card .form-control:focus,
-  .form-card .form-select:focus,
-  .form-card textarea:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-  }
+.header-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    background:rgba(255,255,255,.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    margin-right:20px;
+}
 
-  /* Custom Styling Input File / Upload Gambar */
-  .form-card input[type="file"] {
-    background-color: #f8fafc;
-    padding: 0.5rem;
-    cursor: pointer;
-  }
+/* ================= CARD ================= */
 
-  .form-card input[type="file"]::file-selector-button {
-    background: #6366f1;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-weight: 600;
-    margin-right: 1rem;
-    transition: background 0.2s ease;
-  }
+.form-card{
+    background:#fff;
+    border-radius:24px;
+    padding:40px;
+    max-width:900px;
+    margin:auto;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.05),
+        0 10px 30px rgba(236,72,153,.08);
+}
 
-  .form-card input[type="file"]::file-selector-button:hover {
-    background: #4f46e5;
-  }
+/* ================= LABEL ================= */
 
-  /* Buttons */
-  .btn-save {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.7rem 1.8rem;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-    transition: all 0.2s ease;
-  }
+.form-label{
+    color:#374151;
+    font-weight:600;
+    margin-bottom:8px;
+}
 
-  .btn-save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(16, 185, 129, 0.35);
-    color: white;
-  }
+/* ================= INPUT ================= */
 
-  .btn-back {
-    background-color: #f1f5f9;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 0.7rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
+.form-control,
+.form-select,
+textarea{
 
-  .btn-back:hover {
-    background-color: #e2e8f0;
-    color: #334155;
-  }
+    border:2px solid #e5e7eb;
+    border-radius:14px;
+    background:#fafafa;
+    transition:.3s;
+    font-size:15px;
+
+}
+
+.form-control,
+.form-select{
+    height:55px;
+}
+
+textarea{
+    min-height:120px;
+    resize:none;
+    padding-top:12px;
+}
+
+.form-control:hover,
+.form-select:hover,
+textarea:hover{
+
+    border-color:#f9a8d4;
+
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus{
+
+    background:#fff;
+    border-color:#ec4899;
+    box-shadow:0 0 0 .25rem rgba(236,72,153,.15);
+
+}
+
+/* ================= FILE ================= */
+
+input[type=file]{
+
+    border:2px dashed #f9a8d4;
+    border-radius:14px;
+    background:#fff0f7;
+    padding:15px;
+
+}
+
+input[type=file]::file-selector-button{
+
+    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:600;
+    margin-right:15px;
+    transition:.3s;
+
+}
+
+input[type=file]::file-selector-button:hover{
+
+    opacity:.9;
+
+}
+
+/* ================= BUTTON ================= */
+
+.btn-save{
+
+    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    color:#fff;
+    border:none;
+    border-radius:14px;
+    padding:13px 30px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-save:hover{
+
+    transform:translateY(-3px);
+    color:#fff;
+    box-shadow:0 12px 25px rgba(168,85,247,.35);
+
+}
+
+.btn-back{
+
+    background:#fff;
+    border:2px solid #e5e7eb;
+    color:#64748b;
+    border-radius:14px;
+    padding:13px 28px;
+    font-weight:600;
+    transition:.3s;
+    text-decoration:none;
+
+}
+
+.btn-back:hover{
+
+    background:#fdf2f8;
+    border-color:#f9a8d4;
+    color:#ec4899;
+
+}
+
+.border-top{
+
+    border-color:#eef2f7!important;
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+.page-header{
+
+padding:25px;
+
+}
+
+.page-header h2{
+
+font-size:1.6rem;
+
+}
+
+.header-icon{
+
+display:none;
+
+}
+
+.form-card{
+
+padding:25px;
+
+}
+
+}
 </style>
 
-<div class="container my-4">
-  <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
-    <div>
-      <h2 class="fw-bold m-0">📦 Tambah Produk Baru</h2>
-      <p class="text-white-50 m-0 mt-1">Isi formulir di bawah untuk menambahkan produk baru ke sistem</p>
+<div class="container py-4">
+
+    <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
+
+        <div class="d-flex align-items-center">
+
+            <div class="header-icon">
+                🌸
+            </div>
+
+            <div>
+
+                <h2>Tambah Produk Baru</h2>
+
+                <p>
+                    Tambahkan produk buket baru lengkap dengan harga, stok, dan gambar produk.
+                </p>
+
+            </div>
+
+        </div>
+
+        <a href="{{ route('produk.index') }}" class="btn btn-back mt-3 mt-md-0">
+
+            ← Kembali
+
+        </a>
+
     </div>
-    <a href="{{ route('produk.index') }}" class="btn btn-back mt-2 mt-md-0">
-      ← Kembali
-    </a>
-  </div>
 
-  <div class="form-card">
-    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
-      @csrf
+    <div class="form-card">
 
-      @include('Produk._form')
+        <form action="{{ route('produk.store') }}"
+              method="POST"
+              enctype="multipart/form-data">
 
-      <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-        <a href="{{ route('produk.index') }}" class="btn btn-back">Batal</a>
-        <button type="submit" class="btn btn-save">💾 Simpan Produk</button>
-      </div>
-    </form>
-  </div>
+            @csrf
+
+            @include('Produk._form')
+
+            <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
+
+                <a href="{{ route('produk.index') }}"
+                   class="btn btn-back">
+
+                    Batal
+
+                </a>
+
+                <button type="submit"
+                        class="btn btn-save">
+
+                    💾 Simpan Produk
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
 @endsection

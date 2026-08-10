@@ -7,195 +7,472 @@
 @include('layouts.navbar')
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-  body {
-    background-color: #f0f3f8;
-    color: #2d3748;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+body{
+    background:#f4f7fc;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:#334155;
+}
 
-  /* Header Section */
-  .page-header {
-    background: linear-gradient(135deg, #1e1e38 0%, #2a2a50 100%);
-    color: #ffffff;
-    padding: 1.8rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(30, 30, 56, 0.15);
-    margin-bottom: 2rem;
-  }
+/* HEADER */
+.page-header{
+    background:linear-gradient(135deg,#ff6ea8,#8b5cf6);
+    border-radius:25px;
+    padding:30px 35px;
+    color:#fff;
+    box-shadow:0 18px 35px rgba(139,92,246,.25);
+    margin-bottom:30px;
+}
 
-  /* Card Container */
-  .content-card {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-    padding: 1.8rem;
-    border: 1px solid #e2e8f0;
-    margin-bottom: 2rem;
-  }
+.page-header h2{
+    font-weight:800;
+    font-size:38px;
+}
 
-  /* Summary Card Styling */
-  .summary-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
+.page-header p{
+    margin-top:6px;
+    opacity:.9;
+    font-size:18px;
+}
 
-  .summary-item {
-    display: flex;
-    flex-direction: column;
-  }
+/* CARD */
 
-  .summary-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.25rem;
-  }
+.content-card{
+    background:#fff;
+    border-radius:22px;
+    border:none;
+    box-shadow:0 15px 35px rgba(0,0,0,.06);
+    padding:30px;
+    margin-bottom:30px;
+}
 
-  .summary-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e293b;
-  }
+/* SUMMARY */
 
-  .total-price {
-    color: #10b981;
-    font-size: 1.5rem;
-  }
+.summary-card{
+    background:#f8fafc;
+    border-radius:18px;
+    padding:25px;
+}
 
-  /* Product Thumbnail */
-  .product-thumb {
-    width: 55px;
-    height: 55px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-  }
+.summary-item{
+    text-align:center;
+}
 
-  /* Table Custom Styling */
-  .table-custom thead {
-    background-color: #f8fafc;
-  }
+.summary-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:28px;
+    margin-bottom:15px;
+}
 
-  .table-custom thead th {
-    border: none;
-    color: #64748b;
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 14px 12px;
-  }
+.summary-label{
+    display:block;
+    color:#64748b;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+}
 
-  .table-custom tbody tr {
-    transition: background-color 0.2s ease;
-  }
+.summary-value{
+    font-size:22px;
+    font-weight:800;
+    margin-top:5px;
+}
 
-  .table-custom tbody tr:hover {
-    background-color: #f1f5f9;
-  }
+.total-price{
+    color:#10b981;
+}
 
-  /* Buttons */
-  .btn-back {
-    background-color: #f1f5f9;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 0.7rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
+/* TABLE */
 
-  .btn-back:hover {
-    background-color: #e2e8f0;
-    color: #334155;
-  }
+.table-custom{
+    border-collapse:separate;
+    border-spacing:0 12px;
+}
+
+.table-custom thead th{
+    border:none;
+    background:#eef2ff;
+    color:#4338ca;
+    font-size:14px;
+    text-transform:uppercase;
+    padding:18px;
+}
+
+.table-custom tbody tr{
+    background:white;
+    box-shadow:0 6px 15px rgba(0,0,0,.05);
+}
+
+.table-custom tbody td{
+    padding:18px;
+    vertical-align:middle;
+}
+
+/* FOTO */
+
+.product-thumb{
+    width:65px;
+    height:65px;
+    border-radius:14px;
+    object-fit:cover;
+}
+
+/* BUTTON */
+
+.btn-back{
+    background:white;
+    color:#6366f1;
+    border-radius:12px;
+    padding:10px 24px;
+    border:none;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.btn-back:hover{
+    background:#eef2ff;
+    color:#4338ca;
+}
 </style>
 
 <div class="container my-4">
-  <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
-    <div>
-      <h2 class="fw-bold m-0">🧾 Detail Penjualan</h2>
-      <p class="text-white-50 m-0 mt-1">Rincian transaksi dan item yang dibeli</p>
-    </div>
-    <a href="{{ route('penjualan.index') }}" class="btn btn-back mt-2 mt-md-0">
-      ← Kembali
-    </a>
-  </div>
 
-  <div class="content-card">
-    <h5 class="fw-bold mb-3 text-dark">Ringkasan Transaksi</h5>
+<div class="page-header d-flex justify-content-between align-items-center">
+
+<div>
+
+<h2>🧾 Detail Penjualan</h2>
+
+<p>
+Informasi lengkap transaksi penjualan produk bouquet.
+</p>
+
+</div>
+
+<a href="{{ route('penjualan.index') }}" class="btn btn-back">
+
+← Kembali
+
+</a>
+
+</div>
+<div class="content-card">
+
+    <div class="d-flex align-items-center mb-4">
+        <div class="summary-icon me-3">
+            📋
+        </div>
+
+        <div>
+            <h4 class="fw-bold mb-1">Ringkasan Transaksi</h4>
+            <p class="text-muted mb-0">
+                Informasi utama transaksi penjualan.
+            </p>
+        </div>
+    </div>
+
     <div class="summary-card">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="summary-item">
-            <span class="summary-label">Kasir</span>
-            <span class="summary-value">👤 {{ $sale->user->name ?? 'Sistem' }}</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="summary-item">
-            <span class="summary-label">Tanggal Transaksi</span>
-            <span class="summary-value">📅 {{ $sale->created_at->translatedFormat('d-m-Y H:i:s') }}</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="summary-item">
-            <span class="summary-label">Total Pembayaran</span>
-            <span class="summary-value total-price">Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="content-card">
-    <h5 class="fw-bold mb-3 text-dark">Daftar Produk Dibeli</h5>
-    <div class="table-responsive">
-      <table class="table table-custom align-middle">
-        <thead>
-          <tr>
-            <th scope="col" style="width: 5%;">#</th>
-            <th scope="col" class="text-center" style="width: 10%;">Foto</th>
-            <th scope="col">Nama Produk</th>
-            <th scope="col" class="text-end" style="width: 25%;">Harga Satuan</th>
-          </tr>
-        </thead>
-        <tbody>
-          @forelse($sale->itempenjualan as $index => $item)
-          <tr>
-            <td class="fw-bold text-muted">{{ $index + 1 }}</td>
-            <td class="text-center">
-              @if($item->produk && $item->produk->foto)
-                <img src="{{ asset('storage/' . $item->produk->foto) }}" class="product-thumb" alt="{{ $item->produk->nama }}">
-              @else
-                <div class="bg-light rounded d-flex align-items-center justify-content-center m-auto" style="width: 55px; height: 55px; border: 1px solid #e2e8f0;">
-                  <span class="text-muted" style="font-size: 1rem;">🖼️</span>
+        <div class="row g-4">
+
+            {{-- Kasir --}}
+            <div class="col-md-4">
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        👤
+                    </div>
+
+                    <span class="summary-label">
+                        Kasir
+                    </span>
+
+                    <div class="summary-value">
+                        {{ $sale->user->name ?? 'Sistem' }}
+                    </div>
+
                 </div>
-              @endif
-            </td>
-            <td class="fw-bold text-dark">{{ $item->produk->nama ?? 'Produk Dihapus' }}</td>
-            <td class="text-end fw-bold text-success">
-              Rp {{ number_format($item->produk->harga_jual ?? 0, 0, ',', '.') }}
-            </td>
-          </tr>
-          @empty
-          <tr>
-            <td colspan="4" class="text-muted text-center py-4">
-              Tidak ada item dalam transaksi ini.
-            </td>
-          </tr>
-          @endforelse
-        </tbody>
-      </table>
+
+            </div>
+
+            {{-- Tanggal --}}
+            <div class="col-md-4">
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        📅
+                    </div>
+
+                    <span class="summary-label">
+                        Tanggal
+                    </span>
+
+                    <div class="summary-value">
+
+                        {{ $sale->created_at->translatedFormat('d F Y') }}
+
+                        <br>
+
+                        <small class="text-muted fw-semibold">
+
+                            {{ $sale->created_at->format('H:i') }} WIB
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{-- Total --}}
+            <div class="col-md-4">
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        💰
+                    </div>
+
+                    <span class="summary-label">
+                        Total Pembayaran
+                    </span>
+
+                    <div class="summary-value total-price">
+
+                        Rp {{ number_format($sale->total_pembayaran,0,',','.') }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
+</div>
+
+<div class="content-card">
+
+    <div class="d-flex align-items-center mb-4">
+
+        <div class="summary-icon me-3">
+            🛍️
+        </div>
+
+        <div>
+
+            <h4 class="fw-bold mb-1">
+                Daftar Produk
+            </h4>
+
+            <p class="text-muted mb-0">
+
+                Produk yang terdapat pada transaksi ini.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-custom align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Foto</th>
+
+                    <th>Nama Produk</th>
+
+                    <th class="text-center">Qty</th>
+
+                    <th class="text-end">Harga</th>
+
+                    <th class="text-end">Subtotal</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+              @forelse($sale->itempenjualan as $index => $item)
+
+<tr>
+
+    <td class="fw-bold text-secondary">
+
+        {{ $index + 1 }}
+
+    </td>
+
+    <td>
+
+        @if($item->produk && $item->produk->foto)
+
+            <img
+                src="{{ asset('storage/'.$item->produk->foto) }}"
+                class="product-thumb"
+                alt="{{ $item->produk->nama }}">
+
+        @else
+
+            <div
+                class="d-flex align-items-center justify-content-center bg-light rounded"
+                style="width:65px;height:65px;font-size:28px;">
+
+                📦
+
+            </div>
+
+        @endif
+
+    </td>
+
+    <td>
+
+        <div class="fw-bold fs-5">
+
+            {{ $item->produk->nama ?? 'Produk Dihapus' }}
+
+        </div>
+
+        <small class="text-muted">
+
+            ID Produk :
+            {{ $item->produk->id ?? '-' }}
+
+        </small>
+
+    </td>
+
+    <td class="text-center">
+
+        <span class="badge bg-primary px-3 py-2 rounded-pill fs-6">
+
+            {{ $item->kuantitas }}
+
+        </span>
+
+    </td>
+
+    <td class="text-end fw-semibold">
+
+        Rp {{ number_format($item->produk->harga_jual ?? 0,0,',','.') }}
+
+    </td>
+
+    <td class="text-end">
+
+        <span class="fw-bold text-success fs-5">
+
+            Rp {{ number_format($item->subtotal,0,',','.') }}
+
+        </span>
+
+    </td>
+
+</tr>
+
+@empty
+
+<tr>
+
+    <td colspan="6" class="text-center py-5">
+
+        <div style="font-size:60px">
+
+            📦
+
+        </div>
+
+        <h5 class="mt-3 text-secondary">
+
+            Tidak ada produk dalam transaksi ini
+
+        </h5>
+
+        <p class="text-muted mb-0">
+
+            Produk akan muncul setelah transaksi memiliki item.
+
+        </p>
+
+    </td>
+
+</tr>
+
+@endforelse
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+</div>
+
+<div class="content-card">
+
+    <div class="row align-items-center">
+
+        <div class="col-md-8">
+
+            <div class="d-flex align-items-center">
+
+                <div class="summary-icon me-3">
+                    ✅
+                </div>
+
+                <div>
+
+                    <h5 class="fw-bold mb-1">
+                        Transaksi Berhasil
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        Terima kasih telah menggunakan Bouquet Point of Sale.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+
+            <a href="{{ route('penjualan.index') }}" class="btn btn-back">
+
+                ← Kembali ke Daftar Penjualan
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
 </div>
 
 @endsection

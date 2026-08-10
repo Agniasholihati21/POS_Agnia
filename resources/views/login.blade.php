@@ -5,203 +5,164 @@
 @section('content')
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-*{
-    font-family:'Poppins',sans-serif;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-body{
-    background: linear-gradient(135deg,#ffe4ec,#f8d7ff,#fff5f7);
-}
+    body {
+        margin: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: #fdf2f7;
+        color: #374151;
+    }
 
-/* Container */
-.login-container{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
-}
+    .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
 
-/* Card */
-.login-card{
-    width:100%;
-    max-width:980px;
-    background:#fff;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 20px 50px rgba(0,0,0,.12);
-    display:flex;
-}
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 40px;
+        box-shadow: 0 8px 30px rgba(214, 51, 132, 0.10);
+    }
 
-/* Left Side */
-.left-side{
-    width:50%;
-    background:linear-gradient(135deg,#ff6fa5,#d63384,#8b5cf6);
-    color:white;
-    padding:60px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    position:relative;
-}
+    .login-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
 
-.left-side::before{
-    content:"🌸";
-    position:absolute;
-    font-size:180px;
-    opacity:.12;
-    top:20px;
-    right:20px;
-}
+    .flower-icon {
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fce7f3;
+        border-radius: 50%;
+        font-size: 28px;
+    }
 
-.left-side h1{
-    font-weight:700;
-    font-size:42px;
-    margin-bottom:15px;
-}
+    .login-header h1 {
+        margin: 0;
+        font-size: 25px;
+        font-weight: 700;
+        color: #d63384;
+    }
 
-.left-side p{
-    font-size:16px;
-    line-height:1.8;
-    opacity:.9;
-}
+    .login-header p {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
 
-.flower{
-    font-size:70px;
-    margin-bottom:20px;
-}
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-/* Right Side */
-.right-side{
-    width:50%;
-    padding:55px 45px;
-}
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+    }
 
-.login-title{
-    text-align:center;
-    margin-bottom:35px;
-}
+    .form-control {
+        width: 100%;
+        height: 48px;
+        padding: 0 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        outline: none;
+        font-family: inherit;
+        font-size: 14px;
+        color: #374151;
+        background: #fff;
+        transition: 0.2s;
+    }
 
-.login-title h2{
-    font-weight:700;
-    color:#d63384;
-}
+    .form-control:focus {
+        border-color: #e83e8c;
+        box-shadow: 0 0 0 3px rgba(232, 62, 140, 0.08);
+    }
 
-.login-title p{
-    color:#777;
-}
+    .form-control::placeholder {
+        color: #9ca3af;
+    }
 
-/* Input */
-.form-label{
-    font-weight:600;
-    color:#555;
-}
+    .btn-login {
+        width: 100%;
+        height: 48px;
+        border: none;
+        border-radius: 10px;
+        background: #d63384;
+        color: white;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
 
-.form-control{
-    border-radius:12px;
-    padding:14px;
-    border:1px solid #ddd;
-    transition:.3s;
-}
+    .btn-login:hover {
+        background: #c22575;
+    }
 
-.form-control:focus{
-    border-color:#d63384;
-    box-shadow:0 0 0 .2rem rgba(214,51,132,.15);
-}
+    .error-message {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #dc3545;
+    }
 
-/* Button */
-.btn-login{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,#ff6fa5,#d63384);
-    color:white;
-    font-weight:600;
-    transition:.3s;
-}
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
 
-.btn-login:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(214,51,132,.35);
-}
+    .login-footer {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 12px;
+        color: #9ca3af;
+    }
 
-/* Error */
-.error-message{
-    color:#dc3545;
-    font-size:13px;
-    margin-top:5px;
-}
-
-/* Footer */
-.login-footer{
-    text-align:center;
-    margin-top:25px;
-    color:#777;
-}
-
-.login-footer a{
-    color:#d63384;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.login-footer a:hover{
-    text-decoration:underline;
-}
-
-/* Responsive */
-@media(max-width:768px){
-
-.login-card{
-    flex-direction:column;
-}
-
-.left-side,
-.right-side{
-    width:100%;
-}
-
-.left-side{
-    padding:40px;
-    text-align:center;
-}
-
-.left-side h1{
-    font-size:30px;
-}
-
-}
+    @media (max-width: 480px) {
+        .login-card {
+            padding: 30px 25px;
+        }
+    }
 </style>
 
-<div class="login-container">
+<div class="login-wrapper">
 
-<div class="login-card">
+    <div class="login-card">
 
-    <!-- Left -->
-    <div class="left-side">
+        <div class="login-header">
 
-        <div class="flower">💐</div>
+            <div class="flower-icon">
+                🌷
+            </div>
 
-        <h1>Bouquet Store</h1>
+            <h1>Bouquet Store</h1>
 
-    </div>
+            <p>Silakan masuk untuk melanjutkan</p>
 
-    <!-- Right -->
-    <div class="right-side">
-
-        <div class="login-title">
-            <h2>Masuk ke Akun</h2>
-            <p>Silakan login untuk melanjutkan</p>
         </div>
 
         <form action="{{ route('auth') }}" method="POST">
 
             @csrf
 
-            <div class="mb-3">
+            <div class="form-group">
 
                 <label class="form-label">
                     Email
@@ -212,17 +173,19 @@ body{
                     name="email"
                     value="{{ old('email') }}"
                     class="form-control @error('email') is-invalid @enderror"
-                    placeholder="Masukkan email">
+                    placeholder="Masukkan email"
+                    autofocus
+                >
 
                 @error('email')
-                <div class="error-message">
-                    {{ $message }}
-                </div>
+                    <div class="error-message">
+                        {{ $message }}
+                    </div>
                 @enderror
 
             </div>
 
-            <div class="mb-4">
+            <div class="form-group">
 
                 <label class="form-label">
                     Password
@@ -232,18 +195,19 @@ body{
                     type="password"
                     name="password"
                     class="form-control @error('password') is-invalid @enderror"
-                    placeholder="Masukkan password">
+                    placeholder="Masukkan password"
+                >
 
                 @error('password')
-                <div class="error-message">
-                    {{ $message }}
-                </div>
+                    <div class="error-message">
+                        {{ $message }}
+                    </div>
                 @enderror
 
             </div>
 
-            <button class="btn-login">
-                🌷 Login Sekarang
+            <button type="submit" class="btn-login">
+                Login
             </button>
 
         </form>
@@ -253,8 +217,6 @@ body{
         </div>
 
     </div>
-
-</div>
 
 </div>
 
