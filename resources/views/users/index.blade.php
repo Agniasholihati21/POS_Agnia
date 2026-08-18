@@ -35,7 +35,7 @@
 
   /* Header Section (Gradasi Pink Navbar) */
   .page-header {
-    background: linear-gradient(135deg, #FF758C 0%, #FF7EB3 50%, #B87BFF 100%);
+    background: linear-gradient(135deg, #e78d9b 0%, #e78d9b 50%, #e78d9b 100%);
     border-radius: 20px;
     padding: 2.2rem 2.5rem;
     color: #FFFFFF;
@@ -302,7 +302,7 @@
                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-action-delete" onclick="return confirm('Yakin ingin menghapus user ini?')">
+                  <button type="submit" class="btn btn-action-delete" onclick="return confirm('Yakin ingin menghapus Pengguna ini?')">
                     <i class="bi bi-trash3 me-1"></i> Hapus
                   </button>
                 </form>

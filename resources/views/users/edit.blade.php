@@ -18,7 +18,7 @@ body{
 /* ================= HEADER ================= */
 
 .page-header{
-    background:linear-gradient(135deg,#f472b6 0%,#a855f7 100%);
+    background:linear-gradient(135deg,#e78d9b 0%,#e78d9b 100%);
     border-radius:22px;
     padding:30px 35px;
     margin-bottom:35px;
@@ -96,7 +96,7 @@ body{
 /* ================= BUTTON ================= */
 
 .btn-update{
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     border:none;
     color:white;
     font-weight:600;
@@ -203,7 +203,7 @@ body{
                 </a>
 
                 <button type="submit" class="btn btn-update">
-                    🔄 Perbarui pengguna
+                     Perbarui pengguna
                 </button>
 
             </div>

@@ -18,7 +18,7 @@ body{
 /* ================= HEADER ================= */
 
 .page-header{
-    background:linear-gradient(135deg,#f472b6 0%,#a855f7 100%);
+    background:linear-gradient(135deg,#e78d9b 0%,#e78d9b 100%);
     border-radius:22px;
     padding:30px 35px;
     margin-bottom:35px;
@@ -127,7 +127,7 @@ input[type=file]{
 
 input[type=file]::file-selector-button{
 
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     color:#fff;
     border:none;
     padding:10px 18px;
@@ -148,7 +148,7 @@ input[type=file]::file-selector-button:hover{
 
 .btn-save{
 
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     color:#fff;
     border:none;
     border-radius:14px;
@@ -276,7 +276,7 @@ padding:25px;
                 <button type="submit"
                         class="btn btn-save">
 
-                    💾 Simpan Produk
+                     Simpan Produk
 
                 </button>
 

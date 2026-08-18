@@ -36,7 +36,7 @@
 
   /* Header Section (Diubah ke Gradasi Pink Navbar) */
   .dashboard-header {
-    background: linear-gradient(135deg, #FF758C 0%, #FF7EB3 50%, #B87BFF 100%);
+    background: linear-gradient(135deg, #e78d9b 0%, #e78d9b 50%, #e78d9b  100%);
     border-radius: 20px;
     padding: 2.5rem;
     color: #FFFFFF;

@@ -18,7 +18,7 @@ body{
 /*================ HEADER ================*/
 
 .page-header{
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     border-radius:22px;
     padding:30px 35px;
     color:white;
@@ -203,7 +203,7 @@ body{
 
 .btn-edit{
 
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     color:white;
     border:none;
     padding:12px 30px;
@@ -403,7 +403,7 @@ Kembali
 
 <a href="{{ route('produk.edit',$produk->id) }}" class="btn btn-edit">
 
-✏️ Edit Produk
+Edit Produk
 
 </a>
 

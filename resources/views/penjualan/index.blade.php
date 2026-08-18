@@ -35,7 +35,7 @@
 
   /* Header Section (Gradasi Pink Navbar) */
   .page-header {
-    background: linear-gradient(135deg, #FF758C 0%, #FF7EB3 50%, #B87BFF 100%);
+    background: linear-gradient(135deg, #e78d9b 0%, #e78d9b 50%, #e78d9b 100%);
     border-radius: 20px;
     padding: 2.2rem 2.5rem;
     color: #FFFFFF;
@@ -365,7 +365,7 @@
 
                 @can('view', $sale)
                   <a href="{{ route('penjualan.edit', $sale) }}" class="btn btn-action-edit">
-                    <i class="bi bi-pencil-square me-1"></i> Edit
+                    <i class="bi bi-pencil-square me-1"></i> Lanjutkan
                   </a>
                 @endcan
 

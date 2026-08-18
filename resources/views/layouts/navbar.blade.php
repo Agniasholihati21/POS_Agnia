@@ -18,6 +18,7 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                <!-- BERANDA -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('Beranda') ? 'active' : '' }}"
                        href="{{ route('Beranda') }}">
@@ -26,6 +27,8 @@
                     </a>
                 </li>
 
+
+                <!-- PENGGUNA -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}"
                        href="{{ route('admin.users') }}">
@@ -34,6 +37,7 @@
                     </a>
                 </li>
 
+                <!-- PRODUK -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('produk*') ? 'active' : '' }}"
                        href="{{ route('produk.index') }}">
@@ -42,6 +46,7 @@
                     </a>
                 </li>
 
+                <!-- PENJUALAN -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('penjualan*') ? 'active' : '' }}"
                        href="{{ route('penjualan.index') }}">
@@ -50,22 +55,20 @@
                     </a>
                 </li>
 
+                <!-- TENTANG SAYA -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('tentang') ? 'active' : '' }}"
+                       href="{{ route('tentang') }}">
+                        <i class="bi bi-person-circle me-1"></i>
+                        Tentang Saya
+                    </a>
+                </li>
+
             </ul>
 
             <div class="d-flex align-items-center gap-3">
 
-                <div class="user-info text-white">
-
-                    <small class="d-block opacity-75">
-                        Selamat Datang
-                    </small>
-
-                    <strong>
-                        {{ Auth::user()->name ?? 'Admin' }}
-                    </strong>
-
-                </div>
-
+                <!-- LOGOUT -->
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
 
@@ -81,14 +84,14 @@
     </div>
 </nav>
 
+
 <style>
 
 .florist-navbar{
     background: linear-gradient(
         135deg,
-        #ff8fb1,
-        #ffb3c7,
-        #b388ff
+        #e78d9b,
+        #e78d9b
     );
     padding: 12px 0;
 }

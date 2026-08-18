@@ -18,7 +18,7 @@ body{
 /* ================= HEADER ================= */
 
 .page-header{
-    background:linear-gradient(135deg,#f472b6 0%,#a855f7 100%);
+    background:linear-gradient(135deg,#e78d9b 0%,#e78d9b 100%);
     border-radius:22px;
     padding:30px 35px;
     margin-bottom:35px;
@@ -86,7 +86,7 @@ body{
 .form-control:hover,
 .form-select:hover{
 
-    border-color:#f9a8d4;
+    border-color:#f399ca;
 
 }
 
@@ -94,7 +94,7 @@ body{
 .form-select:focus{
 
     background:white;
-    border-color:#ec4899;
+    border-color:#ed8fbe;
     box-shadow:0 0 0 .25rem rgba(236,72,153,.15);
 
 }
@@ -103,7 +103,7 @@ body{
 
 .btn-save{
 
-    background:linear-gradient(135deg,#f472b6,#8b5cf6);
+    background:linear-gradient(135deg,#e78d9b,#e78d9b);
     border:none;
     color:white;
     font-weight:600;
@@ -117,7 +117,7 @@ body{
 
     transform:translateY(-3px);
     color:white;
-    box-shadow:0 12px 25px rgba(168,85,247,.35);
+    box-shadow:0 12px 25px rgba(222, 55, 125, 0.35);
 
 }
 
@@ -229,7 +229,7 @@ padding:25px;
 
                 <button type="submit" class="btn btn-save">
 
-                    💾 Simpan 
+                     Simpan 
 
                 </button>
 
