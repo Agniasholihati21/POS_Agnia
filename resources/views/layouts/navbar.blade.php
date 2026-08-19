@@ -59,7 +59,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('tentang') ? 'active' : '' }}"
                        href="{{ route('tentang') }}">
-                        <i class="bi bi-person-circle me-1"></i>
+                        <i class="bi bi-info-circle me-1"></i>
                         Tentang Saya
                     </a>
                 </li>
