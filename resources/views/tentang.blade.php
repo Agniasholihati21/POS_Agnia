@@ -141,7 +141,7 @@
 
         <!-- PROFIL -->
         <div class="profile">
-            <img src="{{ asset('images/katsu.jpg') }}" alt="Foto Saya">
+            <img src="{{ asset('images/Agnia.jpg') }}" alt="Foto Saya">
 
             <h1>Agnia Sholihati</h1>
             <p>Web Developer | Pelajar</p>

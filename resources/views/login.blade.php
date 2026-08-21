@@ -47,7 +47,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #fce7f3;
+        background: #e78d9b;
         border-radius: 50%;
         font-size: 28px;
     }
@@ -56,7 +56,7 @@
         margin: 0;
         font-size: 25px;
         font-weight: 700;
-        color: #d63384;
+        color: #e78d9b;
     }
 
     .login-header p {
@@ -92,7 +92,7 @@
     }
 
     .form-control:focus {
-        border-color: #e83e8c;
+        border-color: #e78d9b;
         box-shadow: 0 0 0 3px rgba(232, 62, 140, 0.08);
     }
 
@@ -105,7 +105,7 @@
         height: 48px;
         border: none;
         border-radius: 10px;
-        background: #d63384;
+        background: #e78d9b;
         color: white;
         font-family: inherit;
         font-size: 14px;
@@ -115,7 +115,7 @@
     }
 
     .btn-login:hover {
-        background: #c22575;
+        background: #e78d9b;
     }
 
     .error-message {
