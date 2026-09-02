@@ -42,7 +42,7 @@ body{
 
 
 /* =========================
-   BACK BUTTON
+   BUTTON
 ========================= */
 
 .btn-back{
@@ -59,6 +59,21 @@ body{
 .btn-back:hover{
     background:#eef2ff;
     color:#e78d9b;
+}
+
+.btn-print{
+    background:#fff;
+    color:#334155;
+    border-radius:12px;
+    padding:10px 20px;
+    border:none;
+    font-weight:700;
+    transition:.2s;
+}
+
+.btn-print:hover{
+    background:#f1f5f9;
+    color:#334155;
 }
 
 
@@ -465,9 +480,16 @@ body{
         display:block !important;
     }
 
-    .page-header .btn-back{
-        display:inline-block;
+    .page-header > div:last-child{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
         margin-top:15px;
+    }
+
+    .page-header .btn-back,
+    .page-header .btn-print{
+        display:inline-block;
     }
 
     .invoice-top,
@@ -520,6 +542,211 @@ body{
     }
 }
 
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:15mm;
+    }
+
+    body{
+        background:#fff !important;
+        font-family:Arial,sans-serif !important;
+        color:#000 !important;
+    }
+
+    /* Sembunyikan elemen yang tidak perlu dicetak */
+
+    .navbar,
+    .btn-print,
+    .page-header .btn-back,
+    .invoice-footer .btn-back{
+        display:none !important;
+    }
+
+    /* Container */
+
+    .container{
+        width:100% !important;
+        max-width:100% !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    /* Header */
+
+    .page-header{
+        background:#fff !important;
+        color:#000 !important;
+        box-shadow:none !important;
+        border-radius:0 !important;
+
+        padding:0 0 20px !important;
+        margin-bottom:15px !important;
+
+        border-bottom:2px solid #000;
+    }
+
+    .page-header h2{
+        color:#000 !important;
+        font-size:24px !important;
+    }
+
+    .page-header p{
+        color:#555 !important;
+    }
+
+    /* Invoice */
+
+    .invoice-card{
+        box-shadow:none !important;
+        border:none !important;
+        border-radius:0 !important;
+        margin:0 !important;
+    }
+
+    .invoice-top,
+    .product-area{
+        padding:15px 0 !important;
+    }
+
+    .invoice-title h4{
+        color:#000 !important;
+    }
+
+    .invoice-title p{
+        color:#555 !important;
+    }
+
+    /* Informasi transaksi */
+
+    .transaction-info{
+        border:1px solid #ccc !important;
+    }
+
+    .info-item{
+        border-color:#ccc !important;
+    }
+
+    .info-label{
+        color:#555 !important;
+    }
+
+    .info-value{
+        color:#000 !important;
+    }
+
+    .info-value.total{
+        color:#000 !important;
+    }
+
+    /* Produk */
+
+    .product-heading h4{
+        color:#000 !important;
+    }
+
+    .product-heading span{
+        color:#555 !important;
+    }
+
+    .product-item{
+        border:1px solid #ccc !important;
+        background:#fff !important;
+
+        break-inside:avoid;
+        page-break-inside:avoid;
+    }
+
+    .product-item:hover{
+        background:#fff !important;
+        border-color:#ccc !important;
+    }
+
+    .product-number{
+        background:#f1f1f1 !important;
+        color:#000 !important;
+    }
+
+    .product-name{
+        color:#000 !important;
+    }
+
+    .product-id{
+        color:#555 !important;
+    }
+
+    .qty-value{
+        background:#f1f1f1 !important;
+        color:#000 !important;
+    }
+
+    .price-label,
+    .total-label,
+    .qty-label{
+        color:#555 !important;
+    }
+
+    .price-value{
+        color:#000 !important;
+    }
+
+    .total-value{
+        color:#000 !important;
+    }
+
+    /* Total */
+
+    .total-box{
+        border-top:2px solid #000 !important;
+    }
+
+    .total-row span:first-child{
+        color:#000 !important;
+    }
+
+    .final-total{
+        color:#000 !important;
+    }
+
+    /* Footer */
+
+    .invoice-footer{
+        background:#fff !important;
+        border-top:1px solid #ccc;
+
+        padding:15px 0 !important;
+
+        break-inside:avoid;
+        page-break-inside:avoid;
+    }
+
+    .success-icon{
+        background:#000 !important;
+        color:#fff !important;
+    }
+
+    .success-title{
+        color:#000 !important;
+    }
+
+    .success-text{
+        color:#555 !important;
+    }
+
+    /* Gambar tetap tercetak */
+
+    .product-image{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+}
+
 </style>
 
 
@@ -545,13 +772,36 @@ body{
 
         </div>
 
-        <a href="{{ route('penjualan.index') }}"
-           class="btn btn-back">
 
-            <i class="bi bi-arrow-left me-1"></i>
-            Kembali
+        {{-- BUTTON AREA --}}
 
-        </a>
+        <div class="d-flex gap-2">
+
+            {{-- PRINT --}}
+
+            <button
+                type="button"
+                onclick="window.print()"
+                class="btn btn-print">
+
+                <i class="bi bi-printer me-1"></i>
+                Print
+
+            </button>
+
+
+            {{-- KEMBALI --}}
+
+            <a
+                href="{{ route('penjualan.index') }}"
+                class="btn btn-back">
+
+                <i class="bi bi-arrow-left me-1"></i>
+                Kembali
+
+            </a>
+
+        </div>
 
     </div>
 
@@ -862,8 +1112,9 @@ body{
             </div>
 
 
-            <a href="{{ route('penjualan.index') }}"
-               class="btn-back">
+            <a
+                href="{{ route('penjualan.index') }}"
+                class="btn-back">
 
                 <i class="bi bi-arrow-left me-1"></i>
 
