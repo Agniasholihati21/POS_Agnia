@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemPenjualanController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 
 // Route yang bisa diakses ketika user belum login
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tentang', function () {
         return view('tentang');
     })->name('tentang');
+
+    // Halaman Profil Bouquet POS
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {

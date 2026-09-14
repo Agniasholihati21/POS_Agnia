@@ -3,7 +3,7 @@
 
         <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('Beranda') }}">
             <a class="nav-link {{ Request::is('Bouquet POS') ? 'active' : '' }}"
-                       href="{{ route('tentang') }}">
+                       href="{{ route('profile.index') }}">
             <i class="bi bi-flower1 me-2"></i>
             Bouquet POS
         </a>
@@ -64,6 +64,15 @@
                        href="{{ route('tentang') }}">
                         <i class="bi bi-info-circle me-1"></i>
                         Tentang Saya
+                    </a>
+                </li>
+
+                <!-- PROFIL POS -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }}"
+                       href="{{ route('profile.index') }}">
+                        <i class="bi bi-building me-1"></i>
+                        Profile Bouquet POS
                     </a>
                 </li>
 

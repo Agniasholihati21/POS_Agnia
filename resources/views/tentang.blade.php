@@ -160,72 +160,7 @@
             </p>
         </div>
 
-        <!-- TENTANG APLIKASI -->
-        <div class="section">
-            <h2>Tentang Bouquet POS</h2>
-
-            <p>
-                Aplikasi yang saya buat adalah aplikasi
-                <strong>Point of Sale (POS)</strong> yang digunakan untuk
-                membantu proses pengelolaan penjualan. Aplikasi ini dapat
-                membantu pengguna dalam mengelola data produk, transaksi
-                penjualan, dan informasi yang berhubungan dengan kegiatan
-                penjualan.
-            </p>
-        </div>
-
-        <!-- TEKNOLOGI -->
-        <div class="section">
-            <h2>Teknologi yang Digunakan</h2>
-
-            <div class="info">
-
-                <div class="info-box">
-                    <strong>Framework</strong>
-                    Laravel
-                </div>
-
-                <div class="info-box">
-                    <strong>Bahasa Pemrograman</strong>
-                    PHP
-                </div>
-
-                <div class="info-box">
-                    <strong>Database</strong>
-                    MySQL
-                </div>
-
-                <div class="info-box">
-                    <strong>Frontend</strong>
-                    HTML, CSS, JavaScript
-                </div>
-
-                <div class="info-box">
-                    <strong>Server Lokal</strong>
-                    Laragon
-                </div>
-
-                <div class="info-box">
-                    <strong>Database Management</strong>
-                    HeidiSQL
-                </div>
-
-            </div>
-        </div>
-
-        <!-- FITUR -->
-        <div class="section">
-            <h2>Fitur Aplikasi</h2>
-
-            <ul class="features">
-                <li>Login dan autentikasi pengguna</li>
-                <li>Pengelolaan data produk</li>
-                <li>Pengelolaan transaksi penjualan</li>
-                <li>Menambah, mengubah, dan menghapus data</li>
-                <li>Dashboard untuk melihat informasi aplikasi</li>
-            </ul>
-        </div>
-
+        <!-
         <!-- TOMBOL KEMBALI -->
         <div class="back-button">
             <a href="{{ route('Beranda') }}">
