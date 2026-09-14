@@ -2,6 +2,8 @@
     <div class="container">
 
         <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('Beranda') }}">
+            <a class="nav-link {{ Request::is('Bouquet POS') ? 'active' : '' }}"
+                       href="{{ route('tentang') }}">
             <i class="bi bi-flower1 me-2"></i>
             Bouquet POS
         </a>
@@ -18,6 +20,7 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                
                 <!-- BERANDA -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('Beranda') ? 'active' : '' }}"

@@ -162,7 +162,7 @@
 
         <!-- TENTANG APLIKASI -->
         <div class="section">
-            <h2>Tentang Aplikasi</h2>
+            <h2>Tentang Bouquet POS</h2>
 
             <p>
                 Aplikasi yang saya buat adalah aplikasi
@@ -222,7 +222,6 @@
                 <li>Pengelolaan data produk</li>
                 <li>Pengelolaan transaksi penjualan</li>
                 <li>Menambah, mengubah, dan menghapus data</li>
-                <li>Pencatatan data penjualan</li>
                 <li>Dashboard untuk melihat informasi aplikasi</li>
             </ul>
         </div>

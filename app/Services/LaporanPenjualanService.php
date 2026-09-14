@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class LaporanPenjualanService
 {
-   public function ringkasanHariIni(): array
+    public function ringkasanHariIni(): array
     {
         $data = DB::table('penjualan')
             ->whereDate('created_at', Carbon::today())
@@ -29,20 +29,20 @@ class LaporanPenjualanService
     }
 
     public function produkTerlarisHariIni(int $limit = 5)
-{
-    return DB::table('item_penjualan')
-        ->join('penjualan', 'penjualan.id', '=', 'item_penjualan.penjualan_id')
-        ->join('produk', 'produk.id', '=', 'item_penjualan.produk_id')
-        ->whereDate('penjualan.created_at', Carbon::today())
-        ->where('penjualan.status', 'COMPLETED')
-        ->groupBy('produk.id', 'produk.nama')
-        ->select(
-            'produk.nama',
-            'produk.stok',
-            DB::raw('SUM(item_penjualan.kuantitas) as total_terjual')
-        )
-        ->orderByDesc('total_terjual')
-        ->limit($limit)
-        ->get();
-}
+    {
+        return DB::table('item_penjualan')
+            ->join('penjualan', 'penjualan.id', '=', 'item_penjualan.penjualan_id')
+            ->join('produk', 'produk.id', '=', 'item_penjualan.produk_id')
+            ->whereDate('penjualan.created_at', Carbon::today())
+            ->where('penjualan.status', 'COMPLETED')
+            ->select(
+                'produk.nama',
+                'produk.stok',
+                DB::raw('SUM(item_penjualan.kuantitas) as total_terjual')
+            )
+            ->groupBy('produk.id', 'produk.nama', 'produk.stok') // Fixed: Menambahkan produk.stok
+            ->orderByDesc('total_terjual')
+            ->limit($limit)
+            ->get();
+    }
 }
