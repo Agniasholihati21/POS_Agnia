@@ -357,16 +357,13 @@ body{
 
 .total-area{
     margin-top:25px;
-
     display:flex;
     justify-content:flex-end;
 }
 
 .total-box{
     width:320px;
-
     padding-top:18px;
-
     border-top:2px solid #e78d9b;
 }
 
@@ -386,6 +383,33 @@ body{
     color:#10b981;
     font-size:24px;
     font-weight:800;
+}
+
+
+/* =========================
+   PAYMENT DETAIL
+========================= */
+
+.payment-row{
+    margin-top:12px;
+}
+
+.payment-value{
+    font-size:15px;
+    font-weight:700;
+    color:#334155;
+}
+
+.change-row{
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed #e2e8f0;
+}
+
+.change-value{
+    font-size:18px;
+    font-weight:800;
+    color:#e78d9b;
 }
 
 
@@ -712,6 +736,17 @@ body{
 
     .final-total{
         color:#000 !important;
+    }
+
+    /* Payment */
+
+    .payment-value,
+    .change-value{
+        color:#000 !important;
+    }
+
+    .change-row{
+        border-color:#ccc !important;
     }
 
     /* Footer */
@@ -1054,12 +1089,15 @@ body{
 
 
             {{-- =====================
-                 TOTAL
+                 TOTAL & PEMBAYARAN
             ====================== --}}
 
             <div class="total-area">
 
                 <div class="total-box">
+
+
+                    {{-- TOTAL PEMBAYARAN --}}
 
                     <div class="total-row">
 
@@ -1074,6 +1112,41 @@ body{
                         </span>
 
                     </div>
+
+
+                    {{-- UANG DIBAYAR --}}
+
+                    <div class="total-row payment-row">
+
+                        <span>
+                            Uang Dibayar
+                        </span>
+
+                        <span class="payment-value">
+
+                            Rp {{ number_format($sale->uang_dibayar ?? 0,0,',','.') }}
+
+                        </span>
+
+                    </div>
+
+
+                    {{-- KEMBALIAN --}}
+
+                    <div class="total-row change-row">
+
+                        <span>
+                            Kembalian
+                        </span>
+
+                        <span class="change-value">
+
+                            Rp {{ number_format($sale->kembalian ?? 0,0,',','.') }}
+
+                        </span>
+
+                    </div>
+
 
                 </div>
 

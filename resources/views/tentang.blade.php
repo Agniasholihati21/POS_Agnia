@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Saya</title>
+    <title>Tentang Saya & Aplikasi</title>
 
     <style>
         * {
@@ -67,6 +67,7 @@
 
         .section p {
             line-height: 1.8;
+            color: #555;
         }
 
         .info {
@@ -86,12 +87,18 @@
         .info-box strong {
             display: block;
             margin-bottom: 7px;
-            color: #555;
+            color: #333;
+        }
+
+        .info-box span {
+            color: #666;
+            font-size: 14px;
         }
 
         .features {
             padding-left: 20px;
             line-height: 2;
+            color: #555;
         }
 
         /* TOMBOL KEMBALI */
@@ -120,6 +127,7 @@
             text-align: center;
             margin-top: 30px;
             color: #888;
+            font-size: 14px;
         }
 
         @media (max-width: 600px) {
@@ -142,7 +150,6 @@
         <!-- PROFIL -->
         <div class="profile">
             <img src="{{ asset('images/Agnia.jpg') }}" alt="Foto Saya">
-
             <h1>Agnia Sholihati</h1>
             <p>Web Developer | Pelajar</p>
         </div>
@@ -150,7 +157,6 @@
         <!-- TENTANG SAYA -->
         <div class="section">
             <h2>Tentang Saya</h2>
-
             <p>
                 Halo, saya <strong>Agnia Sholihati</strong>. Saya merupakan seorang
                 pelajar yang tertarik dengan dunia pemrograman dan pengembangan
@@ -160,7 +166,57 @@
             </p>
         </div>
 
-        <!-
+        <!-- TENTANG BOUQUET POS -->
+        <div class="section">
+            <h2>Tentang Bouquet POS</h2>
+            <p>
+                Aplikasi yang saya buat adalah aplikasi <strong>Point of Sale (POS)</strong> yang digunakan untuk membantu proses pengelolaan penjualan. Aplikasi ini dapat membantu pengguna dalam mengelola data produk, transaksi penjualan, dan informasi yang berhubungan dengan kegiatan penjualan.
+            </p>
+        </div>
+
+        <!-- TEKNOLOGI YANG DIGUNAKAN -->
+        <div class="section">
+            <h2>Teknologi yang Digunakan</h2>
+            <div class="info">
+                <div class="info-box">
+                    <strong>Framework</strong>
+                    <span>Laravel</span>
+                </div>
+                <div class="info-box">
+                    <strong>Bahasa Pemrograman</strong>
+                    <span>PHP</span>
+                </div>
+                <div class="info-box">
+                    <strong>Database</strong>
+                    <span>MySQL</span>
+                </div>
+                <div class="info-box">
+                    <strong>Frontend</strong>
+                    <span>HTML, CSS, JavaScript</span>
+                </div>
+                <div class="info-box">
+                    <strong>Server Lokal</strong>
+                    <span>Laragon</span>
+                </div>
+                <div class="info-box">
+                    <strong>Database Management</strong>
+                    <span>HeidiSQL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR APLIKASI -->
+        <div class="section">
+            <h2>Fitur Aplikasi</h2>
+            <ul class="features">
+                <li>Login dan autentikasi pengguna</li>
+                <li>Pengelolaan data produk</li>
+                <li>Pengelolaan transaksi penjualan</li>
+                <li>Menambah, mengubah, dan menghapus data</li>
+                <li>Dashboard untuk melihat informasi aplikasi</li>
+            </ul>
+        </div>
+
         <!-- TOMBOL KEMBALI -->
         <div class="back-button">
             <a href="{{ route('Beranda') }}">

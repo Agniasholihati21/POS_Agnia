@@ -7,13 +7,12 @@
 @include('layouts.navbar')
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     /* ================= GLOBAL ================= */
 
     body {
         background: #f4f7fc;
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: Arial, sans-serif;
         color: #334155;
     }
 
@@ -94,8 +93,8 @@
     }
 
     .pos-search:focus {
-        border-color: #8b5cf6;
-        box-shadow: 0 0 0 .2rem rgba(139, 92, 246, .12);
+        border-color: #e78d9b;
+        box-shadow: 0 0 0 .2rem rgba(231, 141, 155, .12);
     }
 
 
@@ -113,7 +112,7 @@
 
     .product-item-card:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(99, 102, 241, .10);
+        box-shadow: 0 4px 10px rgba(231, 141, 155, .10);
     }
 
     .product-item-card > .row {
@@ -160,13 +159,95 @@
         font-weight: 700;
     }
 
-
-    /* ================= JARAK HARGA ================= */
-
     .product-name + div {
         margin-top: 3px !important;
     }
 
+    /* ================= QRIS ================= */
+
+.qris-payment-box {
+    margin-top: 12px;
+    background: #e0f7fc;
+    border: 1px solid #9ee7f5;
+    border-radius: 14px;
+    padding: 15px;
+}
+
+.qris-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #164e63;
+    margin-bottom: 12px;
+}
+
+.qris-content {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.qris-image-wrapper {
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.qris-image {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+}
+
+.qris-caption {
+    margin-top: 7px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.qris-info {
+    background: rgba(255,255,255,.65);
+    border-radius: 10px;
+    padding: 12px 15px;
+    flex: 1;
+}
+
+.qris-info h6 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 10px;
+}
+
+.qris-info p {
+    font-size: 12px;
+    color: #475569;
+    margin-bottom: 7px;
+}
+
+.qris-info b {
+    color: #e78d9b;
+}
+
+@media (max-width: 576px) {
+
+    .qris-content {
+        flex-direction: column;
+    }
+
+    .qris-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .qris-info {
+        width: 100%;
+    }
+
+}
 
     /* ================= QUANTITY ================= */
 
@@ -224,7 +305,7 @@
     /* ================= TOTAL ================= */
 
     .total-display-card {
-        background: linear-gradient(135deg, #e78d9b, #e78);
+        background: linear-gradient(135deg, #e78d9b, #e78d9b);
         border-radius: 16px;
         padding: 18px;
         color: #fff;
@@ -246,6 +327,78 @@
     }
 
 
+    /* ================= PAYMENT ================= */
+
+    .payment-box {
+        background: #fff;
+        border: 1px solid #e5eaf0;
+        border-radius: 14px;
+        padding: 15px;
+        margin-top: 12px;
+    }
+
+    .payment-box label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    .payment-input {
+        height: 45px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .payment-input:focus {
+        border-color: #e78d9b;
+        box-shadow: 0 0 0 .2rem rgba(231, 141, 155, .15);
+    }
+
+
+    /* ================= KEMBALIAN ================= */
+
+    .change-box {
+        margin-top: 10px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background: #ecfdf5;
+        border: 1px solid #bbf7d0;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .change-box span:first-child {
+        font-size: 13px;
+        font-weight: 700;
+        color: #166534;
+    }
+
+    .change-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: #15803d;
+    }
+
+    .change-box.insufficient {
+        background: #fef2f2;
+        border-color: #fecaca;
+    }
+
+    .change-box.insufficient span:first-child,
+    .change-box.insufficient .change-value {
+        color: #dc2626;
+    }
+
+    .payment-hint {
+        margin-top: 5px;
+        font-size: 11px;
+        color: #64748b;
+    }
+
+
     /* ================= CHECKOUT ================= */
 
     .btn-checkout {
@@ -260,6 +413,11 @@
 
     .btn-checkout:hover {
         color: #fff;
+    }
+
+    .btn-checkout:disabled {
+        opacity: .6;
+        cursor: not-allowed;
     }
 
     .btn-cancel-pos {
@@ -298,11 +456,34 @@
 
 <div class="container-fluid px-4 my-3">
 
-    {{-- ERROR --}}
+
+    {{-- ================= ERROR ================= --}}
+
     @if(session('errors'))
 
         <div class="alert alert-danger mb-3">
             {{ session('errors') }}
+        </div>
+
+    @endif
+
+
+    {{-- ================= VALIDATION ERROR ================= --}}
+
+    @if($errors->any())
+
+        <div class="alert alert-danger mb-3">
+
+            <ul class="mb-0">
+
+                @foreach($errors->all() as $error)
+
+                    <li>{{ $error }}</li>
+
+                @endforeach
+
+            </ul>
+
         </div>
 
     @endif
@@ -339,7 +520,6 @@
         </div>
 
     </div>
-
 
 
     {{-- ================= CONTENT ================= --}}
@@ -400,17 +580,11 @@
                             padding-right:4px;
                         ">
 
-
                         <div class="row g-1">
-
 
                             @forelse($products as $product)
 
-
-                                {{-- PRODUCT --}}
-
                                 <div class="col-12 p-0">
-
 
                                     <form
                                         action="{{ route('itempenjualan.store') }}"
@@ -418,7 +592,6 @@
                                         class="product-item-card">
 
                                         @csrf
-
 
                                         <input
                                             type="hidden"
@@ -469,7 +642,6 @@
 
                                                 </div>
 
-
                                                 <div class="mt-1">
 
                                                     <span class="price-tag">
@@ -503,8 +675,9 @@
                                             <div class="col-md-2">
 
                                                 <button
-                                                    class="btn btn-add-pos w-100 {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}"
-                                                    type="submit">
+                                                    class="btn btn-add-pos w-100"
+                                                    type="submit"
+                                                    {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
 
                                                     ➕
 
@@ -512,17 +685,14 @@
 
                                             </div>
 
-
                                         </div>
 
                                     </form>
-
 
                                 </div>
 
 
                             @empty
-
 
                                 <div class="text-center py-5">
 
@@ -539,9 +709,7 @@
 
                                 </div>
 
-
                             @endforelse
-
 
                         </div>
 
@@ -552,7 +720,6 @@
             </div>
 
         </div>
-
 
 
         {{-- ================= KERANJANG ================= --}}
@@ -575,7 +742,7 @@
 
                         <span class="badge rounded-pill bg-primary fs-6 px-3 py-2">
 
-                            {{ count($sale->itempenjualan) }} Item
+                            {{ $sale->itemPenjualan->count() }} Item
 
                         </span>
 
@@ -592,7 +759,6 @@
                         ">
 
                         <table class="table cart-table align-middle mb-0">
-
 
                             <thead>
 
@@ -619,12 +785,9 @@
 
                             <tbody>
 
-
-                                @forelse($sale->itempenjualan as $item)
-
+                                @forelse($sale->itemPenjualan as $item)
 
                                     <tr>
-
 
                                         {{-- PRODUK --}}
 
@@ -632,13 +795,13 @@
 
                                             <div class="fw-bold">
 
-                                                {{ $item->produk->nama }}
+                                                {{ $item->produk->nama ?? 'Produk Dihapus' }}
 
                                             </div>
 
                                             <small class="text-muted">
 
-                                                Rp {{ number_format($item->produk->harga_jual,0,',','.') }}
+                                                Rp {{ number_format($item->produk->harga_jual ?? 0,0,',','.') }}
 
                                             </small>
 
@@ -656,7 +819,6 @@
                                                 @csrf
 
                                                 @method('PUT')
-
 
                                                 <input
                                                     type="number"
@@ -685,7 +847,7 @@
 
                                         <td class="text-center">
 
-                                            @can('delete',$item)
+                                            @can('delete', $item)
 
                                                 <form
                                                     method="POST"
@@ -694,7 +856,6 @@
                                                     @csrf
 
                                                     @method('DELETE')
-
 
                                                     <button
                                                         class="btn btn-sm btn-outline-danger rounded-circle"
@@ -710,12 +871,9 @@
 
                                         </td>
 
-
                                     </tr>
 
-
                                 @empty
-
 
                                     <tr>
 
@@ -735,9 +893,7 @@
 
                                     </tr>
 
-
                                 @endforelse
-
 
                             </tbody>
 
@@ -746,7 +902,6 @@
                     </div>
 
                 </div>
-
 
 
                 {{-- ================= TOTAL PEMBAYARAN ================= --}}
@@ -771,19 +926,20 @@
                     </div>
 
 
-
-                    {{-- CHECKOUT FORM --}}
+                    {{-- ================= CHECKOUT FORM ================= --}}
 
                     <form
                         method="POST"
                         action="{{ route('penjualan.update', $sale->id) }}"
-                        onsubmit="return confirm('Selesaikan transaksi dan lakukan checkout?')"
+                        onsubmit="return validateCheckout()"
                         class="mt-3">
 
                         @csrf
 
                         @method('PUT')
 
+
+                        {{-- METODE PEMBAYARAN --}}
 
                         <div class="mb-2">
 
@@ -793,10 +949,11 @@
 
                             </label>
 
-
                             <select
                                 name="payment_method"
+                                id="payment_method"
                                 class="form-select"
+                                onchange="togglePaymentFields()"
                                 required
                                 {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
 
@@ -817,9 +974,104 @@
                         </div>
 
 
+                        {{-- ================= CASH ================= --}}
+
+                        <div
+                            id="cash-payment-box"
+                            class="payment-box"
+                            style="display:none;">
+
+                            <div class="mb-2">
+
+                                <label for="uang_dibayar">
+
+                                    💵 Uang Dibayar
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    name="uang_dibayar"
+                                    id="uang_dibayar"
+                                    class="form-control payment-input"
+                                    min="0"
+                                    step="1"
+                                    placeholder="Masukkan jumlah uang"
+                                    autocomplete="off"
+                                    {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
+
+                                <div class="payment-hint">
+
+                                    Masukkan jumlah uang yang diberikan customer.
+
+                                </div>
+
+                            </div>
+
+
+                            {{-- KEMBALIAN --}}
+
+                            <div
+                                id="change-box"
+                                class="change-box">
+
+                                <span>
+                                    Kembalian
+                                </span>
+
+                                <span
+                                    id="change-value"
+                                    class="change-value">
+
+                                    Rp 0
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- ================= QRIS ================= --}}
+
+<div
+    id="qris-payment-box"
+    class="qris-payment-box"
+    style="display:none;">
+
+    <div class="qris-title">
+        📱 Pembayaran QRIS
+    </div>
+
+    <div class="qris-content">
+
+        {{-- FOTO QRIS --}}
+        <div class="qris-image-wrapper">
+
+            <img
+                src="{{ asset('images/qris.jpg') }}"
+                alt="QRIS Pembayaran"
+                class="qris-image">
+
+            <div class="qris-caption">
+                Scan QR untuk melakukan pembayaran
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+                        {{-- ================= CHECKOUT ================= --}}
+
                         <button
                             type="submit"
-                            class="btn btn-checkout w-100 {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}">
+                            id="checkout-button"
+                            class="btn btn-checkout w-100"
+                            {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
 
                             ✅ Checkout & Selesaikan
 
@@ -828,10 +1080,9 @@
                     </form>
 
 
+                    {{-- ================= BATALKAN ================= --}}
 
-                    {{-- BATALKAN --}}
-
-                    @can('delete',$sale)
+                    @can('delete', $sale)
 
                         <form
                             action="{{ route('penjualan.destroy',$sale->id) }}"
@@ -842,7 +1093,6 @@
                             @csrf
 
                             @method('DELETE')
-
 
                             <button
                                 type="submit"
@@ -863,9 +1113,275 @@
 
         </div>
 
-
     </div>
 
 </div>
+
+
+{{-- ================= JAVASCRIPT PEMBAYARAN ================= --}}
+
+<script>
+
+    /*
+    |--------------------------------------------------------------------------
+    | TOTAL TRANSAKSI
+    |--------------------------------------------------------------------------
+    */
+
+    const totalPembayaran = {{ (float) $sale->total_pembayaran }};
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | FORMAT RUPIAH
+    |--------------------------------------------------------------------------
+    */
+
+    function formatRupiah(angka) {
+
+        return 'Rp ' + Number(angka).toLocaleString('id-ID');
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TOGGLE PAYMENT
+    |--------------------------------------------------------------------------
+    */
+
+    function togglePaymentFields() {
+
+        const paymentMethod =
+            document.getElementById('payment_method');
+
+        const cashBox =
+            document.getElementById('cash-payment-box');
+
+        const qrisBox =
+            document.getElementById('qris-payment-box');
+
+        const uangInput =
+            document.getElementById('uang_dibayar');
+
+        const checkoutButton =
+            document.getElementById('checkout-button');
+
+
+        if (!paymentMethod || !cashBox || !qrisBox || !uangInput || !checkoutButton) {
+            return;
+        }
+
+
+        if (paymentMethod.value === 'CASH') {
+
+            cashBox.style.display = 'block';
+
+            qrisBox.style.display = 'none';
+
+            uangInput.disabled = false;
+
+            hitungKembalian();
+
+        }
+
+        else if (paymentMethod.value === 'QRIS') {
+
+            cashBox.style.display = 'none';
+
+            qrisBox.style.display = 'block';
+
+            uangInput.value = '';
+
+            uangInput.disabled = true;
+
+            checkoutButton.disabled = false;
+
+        }
+
+        else {
+
+            cashBox.style.display = 'none';
+
+            qrisBox.style.display = 'none';
+
+            uangInput.value = '';
+
+            uangInput.disabled = false;
+
+            checkoutButton.disabled = true;
+
+        }
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | HITUNG KEMBALIAN
+    |--------------------------------------------------------------------------
+    */
+
+    function hitungKembalian() {
+
+        const uangInput =
+            document.getElementById('uang_dibayar');
+
+        const changeBox =
+            document.getElementById('change-box');
+
+        const changeValue =
+            document.getElementById('change-value');
+
+        const checkoutButton =
+            document.getElementById('checkout-button');
+
+
+        if (!uangInput || !changeBox || !changeValue || !checkoutButton) {
+            return;
+        }
+
+
+        const uangDibayar =
+            parseFloat(uangInput.value) || 0;
+
+
+        const kembalian =
+            uangDibayar - totalPembayaran;
+
+
+        if (uangDibayar === 0) {
+
+            changeValue.innerText = 'Rp 0';
+
+            changeBox.classList.remove('insufficient');
+
+            checkoutButton.disabled = true;
+
+            return;
+        }
+
+
+        if (kembalian < 0) {
+
+            const kurang =
+                Math.abs(kembalian);
+
+            changeValue.innerText =
+                'Kurang ' + formatRupiah(kurang);
+
+            changeBox.classList.add('insufficient');
+
+            checkoutButton.disabled = true;
+
+        }
+
+        else {
+
+            changeValue.innerText =
+                formatRupiah(kembalian);
+
+            changeBox.classList.remove('insufficient');
+
+            checkoutButton.disabled = false;
+
+        }
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | EVENT INPUT UANG
+    |--------------------------------------------------------------------------
+    */
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const uangInput =
+            document.getElementById('uang_dibayar');
+
+        if (uangInput) {
+
+            uangInput.addEventListener(
+                'input',
+                hitungKembalian
+            );
+
+        }
+
+        togglePaymentFields();
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | VALIDASI CHECKOUT
+    |--------------------------------------------------------------------------
+    */
+
+    function validateCheckout() {
+
+        const paymentMethod =
+            document.getElementById('payment_method');
+
+
+        if (!paymentMethod) {
+            return false;
+        }
+
+
+        if (!paymentMethod.value) {
+
+            alert(
+                'Silakan pilih metode pembayaran terlebih dahulu.'
+            );
+
+            return false;
+        }
+
+
+        if (paymentMethod.value === 'CASH') {
+
+            const uangInput =
+                document.getElementById('uang_dibayar');
+
+            const uangDibayar =
+                parseFloat(uangInput.value) || 0;
+
+
+            if (uangDibayar <= 0) {
+
+                alert(
+                    'Masukkan uang pembayaran terlebih dahulu.'
+                );
+
+                return false;
+            }
+
+
+            if (uangDibayar < totalPembayaran) {
+
+                alert(
+                    'Uang pembayaran kurang ' +
+                    formatRupiah(
+                        totalPembayaran - uangDibayar
+                    )
+                );
+
+                return false;
+            }
+
+        }
+
+
+        return confirm(
+            'Selesaikan transaksi sekarang?'
+        );
+
+    }
+
+</script>
 
 @endsection

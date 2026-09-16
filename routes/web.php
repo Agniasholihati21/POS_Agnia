@@ -7,17 +7,16 @@ use App\Http\Controllers\ItemPenjualanController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
 
 
-// Route yang bisa diakses ketika user belum login
+// Route anu tiasa diakses pami user can login
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 });
 
 
-// Route yang bisa diakses ketika user sudah login
+// Route anu tiasa diakses pami user tos login
 Route::middleware('auth')->group(function () {
 
     Route::get('Beranda', [DashboardController::class, 'index'])->name('Beranda');
@@ -27,10 +26,12 @@ Route::middleware('auth')->group(function () {
     // Halaman Tentang Saya
     Route::get('/tentang', function () {
         return view('tentang');
-    })->name('tentang');
+    })->name('tentang'); 
 
-    // Halaman Profil Bouquet POS
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    // ROUTE ENGAL: Pembahasan khusus Bouquet POS
+    Route::get('/tentang-bouquet', function () {
+        return view('bouquet');
+    })->name('bouquet.info');
 
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {

@@ -10,23 +10,29 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $table = 'penjualan';
-    
+
     protected $fillable = [
         'user_id',
         'total_pembayaran',
         'metode_pembayaran',
-        'status'
+        'uang_dibayar',
+        'kembalian',
+        'status',
+    ];
+
+    protected $casts = [
+        'total_pembayaran' => 'decimal:2',
+        'uang_dibayar' => 'decimal:2',
+        'kembalian' => 'decimal:2',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
 
     public function itemPenjualan()
     {
-        return $this->hasMany(ItemPenjualan::class,'penjualan_id');
+        return $this->hasMany(ItemPenjualan::class, 'penjualan_id');
     }
 }
-

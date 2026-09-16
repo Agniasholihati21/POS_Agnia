@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top florist-navbar">
     <div class="container">
 
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('Beranda') }}">
-            <a class="nav-link {{ Request::is('Bouquet POS') ? 'active' : '' }}"
-                       href="{{ route('profile.index') }}">
+        <!-- LOGO / BRAND (Arahna kana pembahasan Bouquet POS) -->
+        <a class="navbar-brand fw-bold d-flex align-items-center {{ Request::is('tentang-bouquet') ? 'brand-active' : '' }}" 
+           href="{{ route('bouquet.info') }}">
             <i class="bi bi-flower1 me-2"></i>
             Bouquet POS
         </a>
@@ -20,7 +20,6 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                
                 <!-- BERANDA -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('Beranda') ? 'active' : '' }}"
@@ -67,15 +66,6 @@
                     </a>
                 </li>
 
-                <!-- PROFIL POS -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }}"
-                       href="{{ route('profile.index') }}">
-                        <i class="bi bi-building me-1"></i>
-                        Profile Bouquet POS
-                    </a>
-                </li>
-
             </ul>
 
             <div class="d-flex align-items-center gap-3">
@@ -111,6 +101,14 @@
 .navbar-brand{
     font-size: 1.4rem;
     letter-spacing: .5px;
+    padding: 5px 12px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.navbar-brand:hover, .navbar-brand.brand-active{
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff !important;
 }
 
 .nav-link{
