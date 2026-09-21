@@ -213,17 +213,30 @@ class PenjualanController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | HITUNG ULANG TOTAL
+            | HITUNG ULANG TOTAL & DISKON
             |--------------------------------------------------------------------------
             |
-            | Jangan mengambil total dari input browser.
-            | Total dihitung langsung dari database.
+            | Hitung subtotal dari item di keranjang.
+            | Jika subtotal >= 1.000.000, berikan diskon 10%.
+            | Total pembayaran yang disimpan merupakan harga setelah diskon.
             |
             */
 
-            $total = $penjualan
+            $subtotal = $penjualan
                 ->itemPenjualan()
                 ->sum('subtotal');
+
+            // Hitung Diskon (misal 10% untuk belanja >= 1 Juta)
+            $diskon = 0;
+            if ($subtotal >= 1000000) {
+                $diskon = ($subtotal * 10) / 100; // Diskon 10%
+                
+                // Jika ingin potongan harga tetap (misal potong 50rb), gunakan:
+                // $diskon = 50000;
+            }
+
+            // Total bayar bersih yang harus dibayar kasir
+            $total = $subtotal - $diskon;
 
 
             /*
@@ -238,7 +251,7 @@ class PenjualanController extends Controller
 
             } else {
 
-                // QRIS dianggap dibayar pas sesuai total
+                // QRIS dianggap dibayar pas sesuai total harga setelah diskon
                 $uangDibayar = (float) $total;
 
             }
@@ -291,7 +304,7 @@ class PenjualanController extends Controller
             $penjualan->update([
                 'metode_pembayaran' => $request->payment_method,
 
-                'total_pembayaran' => $total,
+                'total_pembayaran' => $total, // Menyimpan total harga bersih setelah diskon
 
                 'uang_dibayar' => $uangDibayar,
 

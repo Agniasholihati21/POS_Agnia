@@ -362,7 +362,7 @@ body{
 }
 
 .total-box{
-    width:320px;
+    width:340px;
     padding-top:18px;
     border-top:2px solid #e78d9b;
 }
@@ -371,12 +371,25 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    margin-bottom:8px;
 }
 
 .total-row span:first-child{
     font-size:14px;
     font-weight:700;
     color:#64748b;
+}
+
+.subtotal-value{
+    font-size:15px;
+    font-weight:700;
+    color:#334155;
+}
+
+.discount-value{
+    font-size:15px;
+    font-weight:800;
+    color:#ef4444;
 }
 
 .final-total{
@@ -734,7 +747,9 @@ body{
         color:#000 !important;
     }
 
-    .final-total{
+    .final-total,
+    .subtotal-value,
+    .discount-value{
         color:#000 !important;
     }
 
@@ -1096,10 +1111,48 @@ body{
 
                 <div class="total-box">
 
+                    @php
+                        // Perhitungan Subtotal Asli & Diskon
+                        $subtotalAsli = $sale->itempenjualan->sum('subtotal');
+                        $diskonNominal = $subtotalAsli >= 1000000 ? ($subtotalAsli * 10 / 100) : 0;
+                    @endphp
 
-                    {{-- TOTAL PEMBAYARAN --}}
-
+                    {{-- SUBTOTAL ASLI --}}
                     <div class="total-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span class="subtotal-value">
+
+                            Rp {{ number_format($subtotalAsli, 0, ',', '.') }}
+
+                        </span>
+
+                    </div>
+
+                    {{-- DISKON 10% (HANYA MUNCUL JIKA >= 1 JUTA) --}}
+                    @if($diskonNominal > 0)
+                        <div class="total-row">
+
+                            <span>
+                                Diskon (10%)
+                            </span>
+
+                            <span class="discount-value">
+
+                                -Rp {{ number_format($diskonNominal, 0, ',', '.') }}
+
+                            </span>
+
+                        </div>
+                    @endif
+
+
+                    {{-- TOTAL PEMBAYARAN BERSIH --}}
+
+                    <div class="total-row pt-2 border-top">
 
                         <span>
                             Total Pembayaran
@@ -1107,7 +1160,7 @@ body{
 
                         <span class="final-total">
 
-                            Rp {{ number_format($sale->total_pembayaran,0,',','.') }}
+                            Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
 
                         </span>
 

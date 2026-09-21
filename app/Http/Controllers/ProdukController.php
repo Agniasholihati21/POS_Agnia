@@ -21,17 +21,24 @@ class ProdukController extends Controller
 
         $keyword = $request->input('search');
 
-        if($keyword) {
-            $products = Produk::when($keyword, function ($query) use ($keyword) {
-                $query->where('nama', 'like', '%' . $keyword . '%');
-            })
-            ->orderBy('nama')
-            ->paginate(10)
-            ->withQueryString();
-        }else {
-        $products = Produk::latest()->paginate(10)->withQueryString();
+        // Menghitung total barang terjual menggunakan kolom 'kuantitas'
+        $query = Produk::withSum('itemPenjualan as total_terjual', 'kuantitas');
+
+        if ($keyword) {
+            $products = $query->where('nama', 'like', '%' . $keyword . '%')
+                ->orderBy('nama')
+                ->paginate(10)
+                ->withQueryString();
+        } else {
+            $products = $query->latest()->paginate(10)->withQueryString();
         }
-        return view('produk.index', compact('products'));
+
+        // Mengambil nilai kuantitas terjual terbanyak di antara semua produk
+        $maxSold = Produk::withSum('itemPenjualan as total_terjual', 'kuantitas')
+            ->get()
+            ->max('total_terjual') ?? 0;
+
+        return view('produk.index', compact('products', 'maxSold'));
     }
 
     /**
@@ -62,9 +69,10 @@ class ProdukController extends Controller
         if ($request->hasFile('foto')) {
             $data['foto'] = $request->file('foto')->store('products', 'public');
         }
-         Produk::create($data);
+        
+        Produk::create($data);
 
-         return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -72,9 +80,9 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-         $this->authorize('view', $produk);
+        $this->authorize('view', $produk);
 
-         return view('produk.Detail', compact('produk'));
+        return view('produk.Detail', compact('produk'));
     }
 
     /**
@@ -97,55 +105,49 @@ class ProdukController extends Controller
         $dataReq = $request->validated();
 
         $data = [
-            'user_id'      => Auth::id(),
-            'nama'         => $dataReq['name'],
-            'harga_beli'   => $dataReq['purchase_price'],
-            'harga_jual'   => $dataReq['selling_price'],
-            'stok'         => $dataReq['stock'],
+            'user_id'    => Auth::id(),
+            'nama'       => $dataReq['name'],
+            'harga_beli' => $dataReq['purchase_price'],
+            'harga_jual' => $dataReq['selling_price'],
+            'stok'       => $dataReq['stock'],
         ];
         
-        // Jika upload foto baru
         if ($request->hasFile('foto')) {
-             
-        // Hapus foto lama (jika ada & memang tersimpan)
-        if (
-            $produk->foto &&
-            Storage::disk('public')->exists($produk->foto)
-        ) {
-            Storage::disk('public')->delete($produk->foto);
-        }
-        // Simpan foto baru
-        $data['foto'] = $request->file('foto')->store('products', 'public');
+            if (
+                $produk->foto &&
+                Storage::disk('public')->exists($produk->foto)
+            ) {
+                Storage::disk('public')->delete($produk->foto);
+            }
+            $data['foto'] = $request->file('foto')->store('products', 'public');
         }
 
         $produk->update($data);
 
         return redirect()->route('produk.edit', $produk->id)->with('success', 'Produk berhasil diperbarui.');
     }
-/**
- * Remove the specified resource from storage.
- */
-public function destroy(Produk $produk)
-{
-    $this->authorize('delete', $produk);
 
-    // Cek apakah produk masih digunakan pada item penjualan
-    if ($produk->itemPenjualan()->exists()) {
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Produk $produk)
+    {
+        $this->authorize('delete', $produk);
+
+        if ($produk->itemPenjualan()->exists()) {
+            return redirect()
+                ->route('produk.index')
+                ->with('error', 'Produk tidak dapat dihapus karena sudah digunakan pada transaksi penjualan.');
+        }
+
+        if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
+            Storage::disk('public')->delete($produk->foto);
+        }
+
+        $produk->delete();
+
         return redirect()
             ->route('produk.index')
-            ->with('error', 'Produk tidak dapat dihapus karena sudah digunakan pada transaksi penjualan.');
+            ->with('success', 'Produk berhasil dihapus.');
     }
-
-    // Hapus foto jika ada
-    if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
-        Storage::disk('public')->delete($produk->foto);
-    }
-
-    // Hapus produk
-    $produk->delete();
-
-    return redirect()
-        ->route('produk.index')
-        ->with('success', 'Produk berhasil dihapus.');
-}
 }

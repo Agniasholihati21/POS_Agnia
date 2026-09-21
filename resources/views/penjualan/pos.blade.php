@@ -165,89 +165,89 @@
 
     /* ================= QRIS ================= */
 
-.qris-payment-box {
-    margin-top: 12px;
-    background: #e0f7fc;
-    border: 1px solid #9ee7f5;
-    border-radius: 14px;
-    padding: 15px;
-}
+    .qris-payment-box {
+        margin-top: 12px;
+        background: #e0f7fc;
+        border: 1px solid #9ee7f5;
+        border-radius: 14px;
+        padding: 15px;
+    }
 
-.qris-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #164e63;
-    margin-bottom: 12px;
-}
-
-.qris-content {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.qris-image-wrapper {
-    background: #ffffff;
-    border: 1px solid #dbeafe;
-    border-radius: 12px;
-    padding: 10px;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.qris-image {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    display: block;
-}
-
-.qris-caption {
-    margin-top: 7px;
-    font-size: 11px;
-    color: #64748b;
-}
-
-.qris-info {
-    background: rgba(255,255,255,.65);
-    border-radius: 10px;
-    padding: 12px 15px;
-    flex: 1;
-}
-
-.qris-info h6 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #334155;
-    margin-bottom: 10px;
-}
-
-.qris-info p {
-    font-size: 12px;
-    color: #475569;
-    margin-bottom: 7px;
-}
-
-.qris-info b {
-    color: #e78d9b;
-}
-
-@media (max-width: 576px) {
+    .qris-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #164e63;
+        margin-bottom: 12px;
+    }
 
     .qris-content {
-        flex-direction: column;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .qris-image-wrapper {
+        background: #ffffff;
+        border: 1px solid #dbeafe;
+        border-radius: 12px;
+        padding: 10px;
+        text-align: center;
+        flex-shrink: 0;
     }
 
     .qris-image {
-        width: 160px;
-        height: 160px;
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .qris-caption {
+        margin-top: 7px;
+        font-size: 11px;
+        color: #64748b;
     }
 
     .qris-info {
-        width: 100%;
+        background: rgba(255,255,255,.65);
+        border-radius: 10px;
+        padding: 12px 15px;
+        flex: 1;
     }
 
-}
+    .qris-info h6 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #334155;
+        margin-bottom: 10px;
+    }
+
+    .qris-info p {
+        font-size: 12px;
+        color: #475569;
+        margin-bottom: 7px;
+    }
+
+    .qris-info b {
+        color: #e78d9b;
+    }
+
+    @media (max-width: 576px) {
+
+        .qris-content {
+            flex-direction: column;
+        }
+
+        .qris-image {
+            width: 160px;
+            height: 160px;
+        }
+
+        .qris-info {
+            width: 100%;
+        }
+
+    }
 
     /* ================= QUANTITY ================= */
 
@@ -260,6 +260,39 @@
         font-size: 13px;
         font-weight: 700;
         padding: 2px;
+    }
+
+    /* ================= QUANTITY WARNING ================= */
+
+    .quantity-wrapper {
+        position: relative;
+    }
+
+    .quantity-warning {
+        display: none;
+        margin-top: 5px;
+        color: #d85b70;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .quantity-warning i {
+        margin-right: 3px;
+    }
+
+    .quantity-wrapper.show-warning .quantity-warning {
+        display: block;
+    }
+
+    .qty-input-pos.quantity-error {
+        border: 2px solid #e78d9b;
+        background: #fff5f7;
+    }
+
+    .qty-input-pos.quantity-error:focus {
+        border-color: #e78d9b;
+        box-shadow: 0 0 0 3px rgba(231, 141, 155, 0.15);
     }
 
 
@@ -320,10 +353,19 @@
     }
 
     .total-display-card h3 {
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 800;
-        margin-top: 6px;
+        margin-top: 4px;
         margin-bottom: 0;
+    }
+
+    .discount-info-box {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 8px;
     }
 
 
@@ -661,17 +703,24 @@
 
                                             <div class="col-md-2">
 
-                                                <input
-                                                  type="number"
-                                                 name="quantity"
-                                                 value="1"
-                                                 min="1"
-                                                 max="{{ $product->stok }}"
-                                                 class="form-control qty-input-pos"
-                                                 oninvalid="this.setCustomValidity('Jumlah harus kurang dari atau sama dengan {{ $product->stok }}')"
-                                                 oninput="this.setCustomValidity('')"
-                                                 {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
+                                                <div class="quantity-wrapper">
 
+                                                    <input
+                                                        type="number"
+                                                        name="quantity"
+                                                        value="1"
+                                                        min="1"
+                                                        class="form-control qty-input-pos"
+                                                        data-max="{{ $product->stok }}"
+                                                        oninput="cekJumlahPOS(this)"
+                                                        {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
+
+                                                    <div class="quantity-warning">
+                                                        <i class="bi bi-exclamation-circle"></i>
+                                                        <span></span>
+                                                    </div>
+
+                                                </div>
 
                                             </div>
 
@@ -914,20 +963,28 @@
 
                 <div class="p-3 border-top bg-light">
 
+                    @php
+                        // Perhitungan Subtotal dan Diskon
+                        $subtotalAsli = $sale->itemPenjualan->sum('subtotal');
+                        $diskonNominal = $subtotalAsli >= 1000000 ? ($subtotalAsli * 10 / 100) : 0;
+                        $totalTagihanClean = $subtotalAsli - $diskonNominal;
+                    @endphp
 
-                    {{-- TOTAL --}}
+                    {{-- TOTAL DISPLAY CARD --}}
 
                     <div class="total-display-card">
 
-                        <small>
-                            Total Tagihan
-                        </small>
+                        <small>Total Tagihan</small>
 
-                        <h3>
-
-                            Rp {{ number_format($sale->total_pembayaran,0,',','.') }}
-
+                        <h3 id="display-total-bayar">
+                            Rp {{ number_format($totalTagihanClean, 0, ',', '.') }}
                         </h3>
+
+                        {{-- Rincian Subtotal & Diskon --}}
+                        <div id="discount-wrapper" class="discount-info-box" style="{{ $subtotalAsli >= 1000000 ? '' : 'display: none;' }}">
+                            <div>Subtotal: Rp <span id="display-subtotal">{{ number_format($subtotalAsli, 0, ',', '.') }}</span></div>
+                            <div class="text-warning">🔥 Diskon (10%): -Rp <span id="display-diskon">{{ number_format($diskonNominal, 0, ',', '.') }}</span></div>
+                        </div>
 
                     </div>
 
@@ -1004,6 +1061,7 @@
                                     step="1"
                                     placeholder="Masukkan jumlah uang"
                                     autocomplete="off"
+                                    oninput="hitungKembalian()"
                                     {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
 
                                 <div class="payment-hint">
@@ -1040,35 +1098,34 @@
 
                         {{-- ================= QRIS ================= --}}
 
-<div
-    id="qris-payment-box"
-    class="qris-payment-box"
-    style="display:none;">
+                        <div
+                            id="qris-payment-box"
+                            class="qris-payment-box"
+                            style="display:none;">
 
-    <div class="qris-title">
-        📱 Pembayaran QRIS
-    </div>
+                            <div class="qris-title">
+                                📱 Pembayaran QRIS
+                            </div>
 
-    <div class="qris-content">
+                            <div class="qris-content">
 
-        {{-- FOTO QRIS --}}
-        <div class="qris-image-wrapper">
+                                {{-- FOTO QRIS --}}
+                                <div class="qris-image-wrapper">
 
-            <img
-                src="{{ asset('images/qris.jpg') }}"
-                alt="QRIS Pembayaran"
-                class="qris-image">
+                                    <img
+                                        src="{{ asset('images/qris.jpg') }}"
+                                        alt="QRIS Pembayaran"
+                                        class="qris-image">
 
-            <div class="qris-caption">
-                Scan QR untuk melakukan pembayaran
-            </div>
+                                    <div class="qris-caption">
+                                        Scan QR untuk melakukan pembayaran
+                                    </div>
 
-        </div>
+                                </div>
 
+                            </div>
 
-    </div>
-
-</div>
+                        </div>
 
 
                         {{-- ================= CHECKOUT ================= --}}
@@ -1076,7 +1133,7 @@
                         <button
                             type="submit"
                             id="checkout-button"
-                            class="btn btn-checkout w-100"
+                            class="btn btn-checkout w-100 mt-3"
                             {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
 
                             ✅ Checkout & Selesaikan
@@ -1134,39 +1191,42 @@
     |--------------------------------------------------------------------------
     */
 
-    const totalPembayaran = {{ (float) $sale->total_pembayaran }};
+    const rawSubtotal = {{ (float) $subtotalAsli }};
+    const discountAmount = rawSubtotal >= 1000000 ? (rawSubtotal * 0.1) : 0;
+    const totalPembayaran = rawSubtotal - discountAmount;
 
     /*
-|--------------------------------------------------------------------------
-| CEK STOK
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | CEK STOK
+    |--------------------------------------------------------------------------
+    */
 
-function cekStok(form) {
+    function cekStok(form) {
 
-    const stok = parseInt(form.dataset.stok) || 0;
+        const stok = parseInt(form.dataset.stok) || 0;
 
-    const quantityInput =
-        form.querySelector('input[name="quantity"]');
+        const quantityInput =
+            form.querySelector('input[name="quantity"]');
 
-    const quantity =
-        parseInt(quantityInput.value) || 0;
+        const quantity =
+            parseInt(quantityInput.value) || 0;
 
-    if (quantity > stok) {
+        if (quantity > stok) {
 
-        alert(
-            'Stok tidak mencukupi!\n\n' +
-            'Stok tersedia: ' + stok + '\n' +
-            'Jumlah yang dibeli: ' + quantity
-        );
+            alert(
+                'Stok tidak mencukupi!\n\n' +
+                'Stok tersedia: ' + stok + '\n' +
+                'Jumlah yang dibeli: ' + quantity
+            );
 
-        quantityInput.focus();
+            quantityInput.focus();
 
-        return false;
+            return false;
+        }
+
+        return true;
     }
 
-    return true;
-}
 
     /*
     |--------------------------------------------------------------------------
@@ -1273,83 +1333,36 @@ function cekStok(form) {
         const checkoutButton =
             document.getElementById('checkout-button');
 
-
-        if (!uangInput || !changeBox || !changeValue || !checkoutButton) {
+        if (!uangInput || !changeBox || !changeValue) {
             return;
         }
 
+        const uangDibayar = parseFloat(uangInput.value) || 0;
+        const kembalian = uangDibayar - totalPembayaran;
 
-        const uangDibayar =
-            parseFloat(uangInput.value) || 0;
-
-
-        const kembalian =
-            uangDibayar - totalPembayaran;
-
-
-        if (uangDibayar === 0) {
-
-            changeValue.innerText = 'Rp 0';
+        if (uangDibayar >= totalPembayaran) {
 
             changeBox.classList.remove('insufficient');
 
-            checkoutButton.disabled = true;
+            changeValue.innerText = formatRupiah(kembalian);
 
-            return;
-        }
+            if (checkoutButton) {
+                checkoutButton.disabled = false;
+            }
 
-
-        if (kembalian < 0) {
-
-            const kurang =
-                Math.abs(kembalian);
-
-            changeValue.innerText =
-                'Kurang ' + formatRupiah(kurang);
+        } else {
 
             changeBox.classList.add('insufficient');
 
-            checkoutButton.disabled = true;
+            changeValue.innerText = 'Uang Kurang ' + formatRupiah(Math.abs(kembalian));
 
-        }
-
-        else {
-
-            changeValue.innerText =
-                formatRupiah(kembalian);
-
-            changeBox.classList.remove('insufficient');
-
-            checkoutButton.disabled = false;
+            if (checkoutButton) {
+                checkoutButton.disabled = true;
+            }
 
         }
 
     }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | EVENT INPUT UANG
-    |--------------------------------------------------------------------------
-    */
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const uangInput =
-            document.getElementById('uang_dibayar');
-
-        if (uangInput) {
-
-            uangInput.addEventListener(
-                'input',
-                hitungKembalian
-            );
-
-        }
-
-        togglePaymentFields();
-
-    });
 
 
     /*
@@ -1360,62 +1373,23 @@ function cekStok(form) {
 
     function validateCheckout() {
 
-        const paymentMethod =
-            document.getElementById('payment_method');
+        const paymentMethod = document.getElementById('payment_method').value;
 
+        if (paymentMethod === 'CASH') {
 
-        if (!paymentMethod) {
-            return false;
-        }
-
-
-        if (!paymentMethod.value) {
-
-            alert(
-                'Silakan pilih metode pembayaran terlebih dahulu.'
-            );
-
-            return false;
-        }
-
-
-        if (paymentMethod.value === 'CASH') {
-
-            const uangInput =
-                document.getElementById('uang_dibayar');
-
-            const uangDibayar =
-                parseFloat(uangInput.value) || 0;
-
-
-            if (uangDibayar <= 0) {
-
-                alert(
-                    'Masukkan uang pembayaran terlebih dahulu.'
-                );
-
-                return false;
-            }
-
+            const uangDibayar = parseFloat(document.getElementById('uang_dibayar').value) || 0;
 
             if (uangDibayar < totalPembayaran) {
 
-                alert(
-                    'Uang pembayaran kurang ' +
-                    formatRupiah(
-                        totalPembayaran - uangDibayar
-                    )
-                );
+                alert('Uang pembayaran masih kurang!');
 
                 return false;
+
             }
 
         }
 
-
-        return confirm(
-            'Selesaikan transaksi sekarang?'
-        );
+        return true;
 
     }
 

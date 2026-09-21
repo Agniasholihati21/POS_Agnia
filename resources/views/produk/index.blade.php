@@ -425,7 +425,7 @@ body {
 
 
 /* =====================================================
-   STOCK BADGE
+   STOCK & BESTSELLER BADGE
 ===================================================== */
 
 .stock-badge {
@@ -445,6 +445,8 @@ body {
     font-weight: 700;
 
     backdrop-filter: blur(5px);
+
+    z-index: 2;
 }
 
 
@@ -465,6 +467,42 @@ body {
     color: var(--yellow);
 
     border: 1px solid #ffe29d;
+}
+
+/* BESTSELLER BADGE */
+.bestseller-badge {
+
+    position: absolute;
+
+    top: 12px;
+
+    left: 12px;
+
+    padding: 6px 12px;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    background: linear-gradient(135deg, #ff4e50, #f9d423);
+
+    color: white;
+
+    box-shadow: 0 4px 10px rgba(255, 78, 80, 0.3);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    z-index: 2;
+
+    animation: pulse-bestseller 2s infinite;
+}
+
+@keyframes pulse-bestseller {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 
@@ -513,7 +551,7 @@ body {
 
 
 /* =====================================================
-   INPUT USER
+   INPUT USER & TERJUAL
 ===================================================== */
 
 .product-user {
@@ -522,7 +560,7 @@ body {
 
     align-items: center;
 
-    gap: 6px;
+    justify-content: space-between;
 
     color: var(--muted);
 
@@ -532,11 +570,35 @@ body {
 }
 
 
+.product-user-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+
 .product-user i {
 
     color: var(--pink);
 
     font-size: 14px;
+}
+
+
+.product-sold {
+
+    font-weight: 700;
+
+    color: var(--pink-dark);
+
+    background: var(--pink-light);
+
+    padding: 2px 8px;
+
+    border-radius: 8px;
 }
 
 
@@ -991,6 +1053,18 @@ body {
                     <div class="product-image-wrapper">
 
 
+                        {{-- BESTSELLER BADGE --}}
+                        @if(isset($maxSold) && $maxSold > 0 && ($product->total_terjual ?? 0) == $maxSold)
+
+                            <span class="bestseller-badge">
+
+                                🔥 Bestseller
+
+                            </span>
+
+                        @endif
+
+
                         @if($product->foto)
 
                             <img
@@ -1066,17 +1140,27 @@ body {
 
 
 
-                        {{-- USER --}}
+                        {{-- USER & TERJUAL --}}
 
                         <div class="product-user">
 
-                            <i class="bi bi-person-circle"></i>
+                            <div class="product-user-info">
 
-                            <span>
+                                <i class="bi bi-person-circle"></i>
 
-                                {{ $product->user->name ?? 'Sistem' }}
+                                <span>
 
-                            </span>
+                                    {{ $product->user->name ?? 'Sistem' }}
+
+                                </span>
+
+                            </div>
+
+                            <div class="product-sold">
+
+                                Terjual {{ $product->total_terjual ?? 0 }}
+
+                            </div>
 
                         </div>
 
