@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users','id')->restrictOnDelete();
-            $table->integer('total_pembayaran');
+            $table->integer('total_pembayaran')->default(0);
             $table->string('metode_pembayaran');
+            $table->integer('uang_dibayar')->default(0); // <-- Tambahkan ini
+            $table->integer('kembalian')->default(0);    // <-- Tambahkan ini
             $table->enum('status',['OPEN', 'COMPLETED']);
             $table->timestamps();
-
         });
     }
 

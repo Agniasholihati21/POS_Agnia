@@ -270,7 +270,7 @@
         min-height: 32px;
         border: none;
         border-radius: 8px;
-        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        background: linear-gradient(135deg, #e78d9b, #e78d9b);
         color: #fff;
         font-size: 17px;
         font-weight: 700;
@@ -279,7 +279,7 @@
     }
 
     .btn-add-pos:hover {
-        background: linear-gradient(135deg, #4f46e5, #4338ca);
+        background: linear-gradient(135deg, #e78d9b, #e78d9b);
         color: #fff;
     }
 
@@ -587,9 +587,11 @@
                                 <div class="col-12 p-0">
 
                                     <form
-                                        action="{{ route('itempenjualan.store') }}"
-                                        method="POST"
-                                        class="product-item-card">
+                                     action="{{ route('itempenjualan.store') }}"
+                                     method="POST"
+                                     class="product-item-card"
+                                     onsubmit="return cekStok(this)"
+                                     data-stok="{{ $product->stok }}">
 
                                         @csrf
 
@@ -660,12 +662,16 @@
                                             <div class="col-md-2">
 
                                                 <input
-                                                    type="number"
-                                                    name="quantity"
-                                                    value="1"
-                                                    min="1"
-                                                    class="form-control qty-input-pos"
-                                                    {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
+                                                  type="number"
+                                                 name="quantity"
+                                                 value="1"
+                                                 min="1"
+                                                 max="{{ $product->stok }}"
+                                                 class="form-control qty-input-pos"
+                                                 oninvalid="this.setCustomValidity('Jumlah harus kurang dari atau sama dengan {{ $product->stok }}')"
+                                                 oninput="this.setCustomValidity('')"
+                                                 {{ $sale->status == 'COMPLETED' ? 'disabled' : '' }}>
+
 
                                             </div>
 
@@ -1130,6 +1136,37 @@
 
     const totalPembayaran = {{ (float) $sale->total_pembayaran }};
 
+    /*
+|--------------------------------------------------------------------------
+| CEK STOK
+|--------------------------------------------------------------------------
+*/
+
+function cekStok(form) {
+
+    const stok = parseInt(form.dataset.stok) || 0;
+
+    const quantityInput =
+        form.querySelector('input[name="quantity"]');
+
+    const quantity =
+        parseInt(quantityInput.value) || 0;
+
+    if (quantity > stok) {
+
+        alert(
+            'Stok tidak mencukupi!\n\n' +
+            'Stok tersedia: ' + stok + '\n' +
+            'Jumlah yang dibeli: ' + quantity
+        );
+
+        quantityInput.focus();
+
+        return false;
+    }
+
+    return true;
+}
 
     /*
     |--------------------------------------------------------------------------

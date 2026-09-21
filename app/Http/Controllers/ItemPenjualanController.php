@@ -31,58 +31,85 @@ class ItemPenjualanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'produk_id' => 'required|exists:produk,id',
-            'quantity' => 'required|integer|min:1'
-        ]);
+{
+    $request->validate([
+        'produk_id' => 'required|exists:produk,id',
+        'quantity' => 'required|integer|min:1'
+    ]);
 
-        DB::transaction(function () use ($request) {
-
-        $sale = Penjualan::where('user_id', Auth::id())
+    $sale = Penjualan::where('user_id', Auth::id())
         ->where('status', 'OPEN')
         ->firstOrFail();
 
-        $product = Produk::lockForUpdate()->findOrFail($request->produk_id);
+    $product = Produk::findOrFail($request->produk_id);
 
-        // Cek stok
+    // CEK STOK
+    if ($product->stok < $request->quantity) {
+
+        return back()
+            ->withInput()
+            ->with(
+                'errors',
+                'Stok produk "' . $product->nama .
+                '" tidak mencukupi. Stok tersedia hanya ' .
+                $product->stok . '.'
+            );
+    }
+
+    DB::transaction(function () use ($request, $sale) {
+
+        $product = Produk::lockForUpdate()
+            ->findOrFail($request->produk_id);
+
+        // Cek ulang stok setelah lock
         if ($product->stok < $request->quantity) {
-            return redirect()->route('penjualan.create')->with('errors', 'Produk stok tidak 
-            mencukupi');
-        }
-        // Kurangi stok
-        $product->decrement('stok', $request->quantity);
 
-        // Update / insert item penjualan
+            throw new \Exception(
+                'Stok produk "' . $product->nama .
+                '" tidak mencukupi. Stok tersedia hanya ' .
+                $product->stok . '.'
+            );
+        }
+
+        // Kurangi stok
+        $product->decrement(
+            'stok',
+            $request->quantity
+        );
+
+        // Cari item yang sudah ada
         $item = ItemPenjualan::where('penjualan_id', $sale->id)
-        ->where('produk_id', $product->id)
-        ->lockForUpdate()
-        ->first();
+            ->where('produk_id', $product->id)
+            ->lockForUpdate()
+            ->first();
 
         if ($item) {
-            // UPDATE
+
             $item->kuantitas += $request->quantity;
+
         } else {
-            // CREATE
-            $item = new ItemPenjualan([
-                'penjualan_id' => $sale->id,
-                'produk_id' => $product->id,
-                'kuantitas' => $request->quantity,
-                'harga_satuan' => $product->harga_jual,
-            ]);
+
+            $item = new ItemPenjualan();
+
+            $item->penjualan_id = $sale->id;
+            $item->produk_id = $product->id;
+            $item->kuantitas = $request->quantity;
+            $item->harga_satuan = $product->harga_jual;
         }
 
-        // hitung subtotal SETELAH kuantitas fix 
-        $item->subtotal = $item->kuantitas * $item->harga_satuan;
+        $item->subtotal =
+            $item->kuantitas * $item->harga_satuan;
+
         $item->save();
 
-        // TOTAL PEMBAYARAN
-        $sale->total_pembayaran = $sale->itemPenjualan()->sum('subtotal');
-        $sale->save();
-        });
+        $sale->total_pembayaran =
+            $sale->itemPenjualan()->sum('subtotal');
 
-        return back();
-    }
+        $sale->save();
+    });
+
+    return back();
+}
 
     /**
      * Display the specified resource.

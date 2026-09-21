@@ -1027,7 +1027,6 @@ body {
                             </span>
 
                         @else
-
                             <span class="stock-badge stock-low">
 
                                 <i class="bi bi-exclamation-triangle"></i>
@@ -1159,7 +1158,7 @@ body {
                                     <i class="bi bi-exclamation-circle"></i>
 
                                     Stok rendah
-
+                                
                                 @endif
 
                             </div>

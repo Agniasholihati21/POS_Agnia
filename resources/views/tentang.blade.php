@@ -192,7 +192,7 @@
                 </div>
                 <div class="info-box">
                     <strong>Frontend</strong>
-                    <span>HTML, CSS, JavaScript</span>
+                    <span>HTML, CSS</span>
                 </div>
                 <div class="info-box">
                     <strong>Server Lokal</strong>
